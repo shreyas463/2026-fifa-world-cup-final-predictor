@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { api, pct } from "../api";
 import { useAsync } from "../hooks";
 import { Disclaimer, ErrorMessage, Flag, Loader, ProbabilityBar } from "../components/ui";
-import ProjectsShowcase from "../components/ProjectsShowcase";
 
 export default function Home() {
   const { data, loading, error, reload } = useAsync(() => api.predictions(), []);
@@ -95,8 +94,6 @@ export default function Home() {
           <Disclaimer />
         </>
       )}
-
-      <ProjectsShowcase />
     </div>
   );
 }
