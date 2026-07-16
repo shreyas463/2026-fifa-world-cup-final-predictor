@@ -1,4 +1,6 @@
 // Typed client for the World Cup prediction API.
+import { staticApi } from "./staticApi";
+
 const BASE = import.meta.env.VITE_API_URL ?? "";
 
 async function get<T>(path: string): Promise<T> {
@@ -113,7 +115,7 @@ export interface Bracket {
   results_source?: string;
   as_of?: string;
   schedule: { round: string; dates: string }[];
-  groups: Record<string, (BracketTeam & { group: string; qualified: boolean; position: string })[]>;
+  groups: Record<string, (BracketTeam & { group: string; qualified: boolean; position: string; points: number; gf: number; ga: number })[]>;
   knockout: { name: string; dates: string; matches: KnockoutMatch[] }[];
   final: KnockoutMatch & { dates: string };
   third_place: KnockoutMatch & { dates: string };
@@ -161,7 +163,7 @@ export interface ModelMetrics {
   limitations: string[];
 }
 
-export const api = {
+const httpApi = {
   teams: (params?: { q?: string; group?: string; confederation?: string }) => {
     const qs = new URLSearchParams();
     if (params?.q) qs.set("q", params.q);
@@ -200,5 +202,11 @@ export const api = {
       disclaimer: string;
     }>(`/api/team-comparison?team_a=${team_a}&team_b=${team_b}`),
 };
+
+// Use the static (pre-computed JSON) client when built with VITE_STATIC=true,
+// e.g. for GitHub Pages; otherwise talk to the live FastAPI backend.
+export const api = (import.meta.env.VITE_STATIC === "true"
+  ? staticApi
+  : httpApi) as typeof httpApi;
 
 export const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
