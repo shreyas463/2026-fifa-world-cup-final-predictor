@@ -10,9 +10,11 @@ import json
 from functools import lru_cache
 from pathlib import Path
 
+from ..data import wc2026
 from ..data.sentiment import get_provider
 from ..data.teams import Team, groups_map, load_teams
 from ..engine.bracket import authored_bracket
+from ..engine.match import predict_match
 from ..engine.simulate import run_monte_carlo
 
 ARTIFACT_DIR = Path(__file__).resolve().parents[2] / "artifacts"
@@ -41,9 +43,21 @@ class State:
         self.by_id: dict[int, Team] = {t.id: t for t in self.teams}
         self.metrics = self._load_metrics()
         self.mc = run_monte_carlo(n=CANONICAL_SIMS, teams=self.teams)["probabilities"]
-        self.bracket = authored_bracket(self.teams)
+        self.bracket = self._build_bracket()
         self.sentiment = get_provider().all()
         self._attr_scores = self._build_attribute_scores()
+
+    def _build_bracket(self) -> dict:
+        """Prefer the cached real bracket; else build live from raw data; else
+        fall back to the authored bracket."""
+        cached = wc2026.load_cache()
+        if cached:
+            return cached
+        if wc2026.has_raw():
+            b = wc2026.build_bracket(self.teams, predict_match)
+            wc2026.save_cache(b)
+            return b
+        return authored_bracket(self.teams)
 
     def _load_metrics(self) -> dict:
         path = ARTIFACT_DIR / "metrics.json"

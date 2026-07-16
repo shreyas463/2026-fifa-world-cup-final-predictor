@@ -64,7 +64,7 @@ export default function Home() {
                     </div>
                     <div className="w-32 shrink-0">
                       <div className="font-semibold text-white">{t.name}</div>
-                      <div className="text-xs text-slate-500">FIFA {Math.round(t.fifa_points)}</div>
+                      <div className="text-xs text-slate-500">Elo {Math.round(t.elo)}</div>
                     </div>
                     <div className="flex-1">
                       <ProbabilityBar value={t.win_probability} color={i === 0 ? "#f4c542" : "#12a150"} />

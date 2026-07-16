@@ -58,7 +58,9 @@ export default function ModelInsights() {
     <div>
       <SectionTitle
         title="Model Insights"
-        subtitle={`Best model: ${m.best_model} · trained on ${m.training.n_matches.toLocaleString()} matches (${m.training.n_train.toLocaleString()} train / ${m.training.n_validation?.toLocaleString()} val / ${m.training.n_test.toLocaleString()} test).`}
+        subtitle={`Best model: ${m.best_model} · trained on ${(m.training.total_internationals ?? m.training.n_matches).toLocaleString()} real internationals${
+          m.training.history_span ? ` (${m.training.history_span})` : ""
+        } · chronological ${m.training.n_train.toLocaleString()} / ${m.training.n_validation?.toLocaleString()} / ${m.training.n_test.toLocaleString()} split.`}
       />
 
       <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
@@ -92,7 +94,7 @@ export default function ModelInsights() {
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="card p-6">
           <h3 className="mb-1 font-semibold text-white">Feature importance</h3>
-          <p className="mb-3 text-xs text-slate-400">Which of the 13 inputs the model relies on most.</p>
+          <p className="mb-3 text-xs text-slate-400">Which inputs the model relies on most (real match features).</p>
           <ResponsiveContainer width="100%" height={360}>
             <BarChart data={m.feature_importance} layout="vertical" margin={{ left: 30 }}>
               <XAxis type="number" tick={AXIS} />

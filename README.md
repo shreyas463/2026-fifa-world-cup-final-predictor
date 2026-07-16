@@ -2,12 +2,12 @@
 
 # 🏆 2026 FIFA World Cup Winner Predictor
 
-### *The real 48-team field. Real FIFA rankings. A model that reads the room — and the timeline.*
+### *Trained on 49,000+ real international matches. Built on the real 2026 results.*
 
-A full-stack machine-learning app built on the **actual 2026 World Cup Final Draw**
-and **real FIFA ranking points**. It rates every nation, predicts any match, folds
-in **social-media fan sentiment**, and plays the tournament out thousands of times
-to estimate who lifts the trophy.
+A full-stack ML app that replays **every international since 1872** into a live Elo,
+trains an outcome model on real history, folds in **fan sentiment** and injuries,
+and reports each nation's odds — with a bracket built from the **actual recorded
+2026 World Cup results** through the semifinals.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
@@ -22,28 +22,23 @@ to estimate who lifts the trophy.
 
 ## 🥇 The verdict
 
-> From **5,000 Monte Carlo simulations** on the real draw & FIFA points:
+> From **5,000 Monte Carlo simulations** on real, Elo-replayed team strengths:
 
 | 🏆 | Team | Win the Cup | Reach the final | Escape the group |
 |:--:|------|:-----------:|:---------------:|:----------------:|
-| 🥇 | 🇦🇷 **Argentina** | **24.3%** | 38.2% | 99.9% |
-| 🥈 | 🇫🇷 France | 23.6% | 37.8% | 99.7% |
-| 🥉 | 🇪🇸 Spain | 19.7% | 34.6% | 100% |
-| 4 | 🏴 England | 11.3% | 21.5% | 99.9% |
-| 5 | 🇲🇦 Morocco | 4.2% | 10.8% | 99.2% |
+| 🥇 | 🇪🇸 **Spain** | **40.9%** | 53.7% | 99.9% |
+| 🥈 | 🇦🇷 Argentina | 20.2% | 35.2% | 99.7% |
+| 🥉 | 🇫🇷 France | 9.7% | 19.2% | 99.3% |
+| 4 | 🇨🇴 Colombia | 5.5% | 12.8% | 95.8% |
+| 5 | 🇵🇹 Portugal | 3.6% | 9.5% | 96.1% |
 
-The four statistical favourites — Argentina, France, Spain, England — are exactly
-the real top-4 FIFA-ranked sides, and exactly the four semifinalists in the
-projected bracket. 🍿
+Spain tops the model on the back of the **highest real Elo** in the field — and,
+in the real data, they've already beaten France 2-0 in the semifinal.
 
-**Projected final (Sun 19 Jul):** 🇪🇸 Spain vs 🇦🇷 Argentina → **Argentina** on penalties.
-**Third place (Fri 17 Jul):** 🇫🇷 France beat 🏴 England.
-
-> ⚠️ **Honesty note:** verified real 2026 *match results* aren't in any dataset
-> this project can access, so the bracket scorelines are a **deterministic
-> projection** (favourite advances, with one scripted semifinal upset to reach
-> the specified final) — not scraped fact. Everything else (draw, rankings,
-> pedigree) is real. See [the fine print](#-the-honest-fine-print).
+**🗺️ Bracket (real results):** every match group-stage → semifinals uses the
+**actual recorded scoreline**. As of the data snapshot the **final (Sun 19 Jul,
+🇪🇸 Spain vs 🇦🇷 Argentina)** and **third-place play-off (🇫🇷 France vs 🏴 England)**
+are unplayed — the model predicts **Spain 1-0 Argentina** and France for third.
 
 ---
 
@@ -52,14 +47,14 @@ projected bracket. 🍿
 | Page | The fun part |
 |------|--------------|
 | 🏠 **Home** | Predicted champion + top-5 contenders |
-| 🌍 **Team Predictions** | Search / filter / sort 48 nations; round-by-round odds, strengths, weaknesses, radar |
-| 🎯 **Match Predictor** | Win/draw/loss, xG, scoreline, H2H, and the key factors — now incl. availability & sentiment |
+| 🌍 **Team Predictions** | Search / filter / sort 48 nations; round-by-round odds, radar, strengths |
+| 🎯 **Match Predictor** | Win/draw/loss, xG, scoreline, **real head-to-head history**, key factors |
 | 🎲 **Simulator** | Run 1 → 20,000 tournaments; interactive bracket + group tables |
-| 🗺️ **Bracket** | The authored knockout path with real schedule, scores & podium |
-| ⚖️ **Compare** | Two teams, radar + metric-by-metric (incl. sentiment & squad fitness) |
+| 🗺️ **Bracket** | Real recorded 2026 results + predicted final/third-place |
+| ⚖️ **Compare** | Two teams, radar + metric-by-metric (Elo, availability, sentiment) |
 | 📊 **Leaderboard** | Every nation ranked by title probability |
 | 💬 **Fan Sentiment** | Social-media positivity, buzz & momentum per team |
-| 🧠 **Model Insights** | Full metrics, train/val/test, overfitting check, 13-feature importance |
+| 🧠 **Model Insights** | Real-data metrics, chronological split, overfitting check, feature importance |
 
 ---
 
@@ -83,17 +78,17 @@ flowchart LR
     end
 
     subgraph CORE["⚙️ Prediction core"]
-        MATCH["Match engine<br/>ML + Poisson"]
+        MATCH["Match engine<br/>model + Poisson"]
         SIM["Monte Carlo<br/>simulator"]
-        BRK["Authored bracket<br/>(deterministic)"]
+        BRK["Real 2026 bracket<br/>+ predicted final"]
         MODEL[("🧠 model.joblib")]
     end
 
     subgraph DATA["📦 Real data & ML"]
-        TEAMS["Real 2026 draw<br/>+ FIFA points"]
-        SENT["Fan-sentiment<br/>provider (pluggable)"]
-        FEAT["13-feature engineering<br/>(leakage-free)"]
-        TRAIN["Trainer<br/>LR · RF · GBM · Poisson"]
+        HIST["49k real internationals<br/>(martj42, 1872–2026)"]
+        ELO["Elo replay<br/>+ form / goals / H2H"]
+        SENT["Fan sentiment<br/>(pluggable)"]
+        TRAIN["Trainer<br/>time-split · LR/RF/GBM"]
     end
 
     SVC --> MATCH
@@ -101,12 +96,11 @@ flowchart LR
     SVC --> BRK
     MATCH --> MODEL
     TRAIN --> MODEL
-    TEAMS --> FEAT --> TRAIN
-    SENT --> FEAT
-    SENT --> SVC
-    TEAMS --> SIM
-    TEAMS --> BRK
-    TEAMS --> MATCH
+    HIST --> ELO --> TRAIN
+    ELO --> MATCH
+    ELO --> SIM
+    HIST --> BRK
+    SENT --> MATCH
 ```
 
 ---
@@ -116,40 +110,24 @@ flowchart LR
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'primaryColor':'#0c7d3d','primaryTextColor':'#e2e8f0','primaryBorderColor':'#12a150','lineColor':'#f4c542','fontFamily':'Segoe UI, sans-serif'}}}%%
 flowchart TD
-    A["📦 Real 2026 field<br/>draw · FIFA points · pedigree · squad value"]
-    S["💬 Fan sentiment<br/>positivity · buzz · momentum"]
-    V["🩹 Availability<br/>squad fitness / injuries"]
-    B["🔁 Reproducible synthetic<br/>match history"]
-    C["🧬 13 features<br/>rating · form · attack/def · H2H · sentiment · …"]
-    D["🤖 Train / validate / test<br/>LR · RF · GBM · Poisson"]
+    A["📚 49k real internationals<br/>(martj42, 1872–2026)"]
+    B["🔁 Elo replay<br/>importance & margin weighted"]
+    C["🧬 Leakage-free features<br/>elo · form · goals · H2H · venue"]
+    D["🤖 Chronological train/val/test<br/>LR · RF · GBM · Poisson"]
+    X["💬 Sentiment + 🩹 injuries<br/>current-context nudge"]
     E["🎯 Match engine<br/>win/draw/loss + xG"]
     F["🎲 Monte Carlo × thousands"]
     G["📈 Stage probabilities → 🏆"]
 
     A --> B --> C --> D --> E --> F --> G
-    S --> C
-    V --> C
-    A -.same features.-> E
+    X --> E
 
     style G fill:#0c7d3d,stroke:#f4c542,stroke-width:2px
 ```
 
-> 🔒 **No data leakage:** every feature is built only from *pre-match* stats, and
-> the **same** `build_feature_row()` runs in training *and* live inference.
-> Model is chosen on a **validation** split and reported on a held-out **test**
-> split — the train/test accuracy gap is ≈ 0.00 (no overfitting).
-
----
-
-## 🏟️ The tournament format
-
-```mermaid
-%%{init: {'theme':'base','themeVariables':{'primaryColor':'#0c7d3d','primaryTextColor':'#e2e8f0','primaryBorderColor':'#12a150','lineColor':'#f4c542','fontFamily':'Segoe UI, sans-serif'}}}%%
-flowchart LR
-    G["🏟️ 12 groups × 4"] --> Q{"Top 2<br/>+ 8 best 3rd"}
-    Q --> R32["Round of 32"] --> R16["Round of 16"] --> QF["Quarterfinals"] --> SF["Semifinals"] --> F["Final ⚽"] --> W["🏆 Champion"]
-    style W fill:#f4c542,stroke:#0c7d3d,stroke-width:2px,color:#0a0f1c
-```
+> 🔒 **No leakage, honest testing:** every feature uses only pre-match state, and
+> the model is trained on the past and tested on the **most recent** matches
+> (chronological split). Train/test accuracy gap ≈ 0 — no overfitting.
 
 ---
 
@@ -160,8 +138,8 @@ flowchart LR
 | **Frontend** | React 18 · TypeScript · Vite · Tailwind CSS · Recharts · React Router |
 | **Backend** | Python · FastAPI · Uvicorn · Pydantic |
 | **ML / data** | scikit-learn · NumPy · pandas · joblib |
-| **Models** | Logistic Regression · Random Forest · Gradient Boosting · Poisson |
-| **Features** | FIFA points · form · attack/defence · **head-to-head** · **squad availability** · **fan sentiment** · pedigree · squad value · host advantage |
+| **Data** | [martj42/international_results](https://github.com/martj42/international_results) (49k+ matches) |
+| **Features** | real Elo · form · goals for/against · head-to-head · home advantage · + sentiment/injury nudges |
 
 ---
 
@@ -174,10 +152,17 @@ cd backend
 python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-python -m wc2026.ml.eda        # (optional) exploratory data analysis
-python -m wc2026.ml.train      # train + evaluate → backend/artifacts/
+# Optional — only needed to RE-train (cached artifacts are committed):
+git clone https://github.com/martj42/international_results.git data_raw
+python -m wc2026.ml.eda        # exploratory data analysis on real matches
+python -m wc2026.ml.train      # Elo replay + train → backend/artifacts/
+
 uvicorn wc2026.api.main:app --reload --port 8000
 ```
+
+The app ships with cached `model.joblib`, `current_form.json` and
+`bracket_2026.json`, so it runs **without** the raw dataset. Re-training just
+refreshes them.
 
 **2️⃣ Frontend** 💅
 
@@ -196,10 +181,10 @@ npm run dev                    # http://localhost:5173  (proxies /api → :8000)
 | `GET`  | `/api/teams` | All teams — `?q=` `?group=` `?confederation=` |
 | `GET`  | `/api/teams/{id}` | One team's stats + predictions + sentiment |
 | `GET`  | `/api/predictions` | Championship leaderboard + favourite |
-| `POST` | `/api/predict-match` | `{team_a_id, team_b_id, neutral}` → match odds |
+| `POST` | `/api/predict-match` | `{team_a_id, team_b_id, neutral}` → odds + real H2H |
 | `POST` | `/api/simulate-tournament` | `{simulations, seed?}` → single or aggregate |
-| `GET`  | `/api/bracket` | Authored bracket + schedule + podium |
-| `GET`  | `/api/sentiment` | Fan-sentiment table (positivity / buzz / momentum) |
+| `GET`  | `/api/bracket` | Real 2026 bracket + predicted final/third-place |
+| `GET`  | `/api/sentiment` | Fan-sentiment table |
 | `GET`  | `/api/model-metrics` | Full evaluation report |
 | `GET`  | `/api/team-comparison?team_a=&team_b=` | Side-by-side comparison |
 
@@ -209,10 +194,10 @@ npm run dev                    # http://localhost:5173  (proxies /api → :8000)
 
 ```
 backend/wc2026/
-├── data/  teams.py (real draw + FIFA points) · sentiment.py (pluggable)
-├── ml/    features.py · dataset.py · eda.py · train.py (train/val/test)
-├── engine/ poisson.py · match.py · simulate.py · bracket.py (authored)
-└── api/   service.py · main.py
+├── data/    teams.py · sentiment.py · wc2026.py (real bracket)
+├── ml/      history.py · elo_features.py · eda.py · train.py
+├── engine/  poisson.py · match.py · simulate.py · bracket.py (fallback)
+└── api/     service.py · main.py
 frontend/src/{pages,components}/   # 9 pages + shared UI
 ```
 
@@ -220,25 +205,23 @@ frontend/src/{pages,components}/   # 9 pages + shared UI
 
 ## 🎓 The honest fine print
 
-- **What's real:** the 2026 **Final Draw** (5 Dec 2025) groups A–L, the 48
-  qualified teams, **FIFA/Coca-Cola ranking points** (July 2026 snapshot), and
-  World Cup titles / appearances.
-  <sub>Sources: [FIFA.com](https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026), [Wikipedia — 2026 draw](https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_draw), [FIFA Men's World Ranking](https://inside.fifa.com/fifa-world-ranking/men).</sub>
-- **Estimated:** eight lower-ranked / playoff qualifiers (Bosnia, Haiti, Curaçao,
-  New Zealand, Cape Verde, Iraq, Jordan, Ghana) use best-estimate FIFA points —
-  they sit outside the public top-60 table (flagged `(est)` in `teams.py`).
-- **The bracket** is a **deterministic authored projection**, not random and not
-  scraped: the favourite advances, with one scripted semifinal upset (Spain over
-  France) to realise the specified Spain–Argentina final. Scorelines are
-  model-projected — drop real scores into `engine/bracket.py` and they render
-  verbatim.
-- **Fan sentiment** is a curated, documented snapshot (fan-base scale +
-  expectations), served through a `SentimentProvider` interface with an
-  `XApiSentimentProvider` stub — **live X scraping needs an API token** and is
-  intentionally not enabled offline.
-- **The model** trains on a reproducible synthetic history sampled from real team
-  strengths; three-way accuracy ≈ **0.56** with a **~0 train/test gap**. Sharp
-  bookmaker models sit ~50–55%, so this is a solid, honestly-reported result.
+- **Trained on real matches.** ~49,000 internationals (1872–2026) from
+  [martj42/international_results](https://github.com/martj42/international_results),
+  replayed into a World-Football-style **Elo**; the classifier learns from real
+  Elo, form, goal rates, head-to-head and home advantage. **Test accuracy ≈ 0.61**
+  on the most recent matches (chronological split, no overfitting). Injuries and
+  fan sentiment — absent from match history — are applied as small documented
+  **current-context nudges**.
+- **The bracket is real** through the semifinals — actual recorded scorelines
+  (penalty shootouts resolved from the dataset). The **final and third-place**
+  are genuinely unplayed as of the snapshot, so those two are clearly-flagged
+  **model predictions**.
+- **The 2026 field & draw are real** (Final Draw, 5 Dec 2025). FIFA ranking
+  points are real (July 2026); eight lower-ranked qualifiers use best-estimate
+  points (flagged in `teams.py`).
+- **Fan sentiment** is a curated, documented snapshot behind a `SentimentProvider`
+  interface with an `XApiSentimentProvider` stub — live X scraping needs an API
+  token and isn't enabled offline.
 - **It's estimates, all the way down.** Injuries, red cards, tactics and penalty
   shootouts don't read spreadsheets. See [`REPORT.md`](REPORT.md).
 
@@ -247,6 +230,7 @@ frontend/src/{pages,components}/   # 9 pages + shared UI
 <div align="center">
 
 **Built for the love of the game.** Not affiliated with FIFA. Flags are Unicode emoji.
+Match data © [martj42/international_results](https://github.com/martj42/international_results) (CC0).
 
 📄 [Full methodology & results → REPORT.md](REPORT.md)
 

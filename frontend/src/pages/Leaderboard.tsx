@@ -29,7 +29,7 @@ export default function Leaderboard() {
                 <tr className="border-b border-white/10 text-left text-xs uppercase tracking-wide text-slate-400">
                   <th className="p-3">#</th>
                   <th className="p-3">Team</th>
-                  <th className="p-3 text-right">FIFA pts</th>
+                  <th className="p-3 text-right">Elo</th>
                   <th className="p-3 text-right">Form</th>
                   <th className="p-3 text-right">Knockouts</th>
                   <th className="p-3 text-right">Final</th>
@@ -48,7 +48,7 @@ export default function Leaderboard() {
                         {t.host && <span className="chip !px-1.5 !py-0 text-[10px]">HOST</span>}
                       </Link>
                     </td>
-                    <td className="p-3 text-right tabular-nums text-slate-300">{Math.round(t.fifa_points)}</td>
+                    <td className="p-3 text-right tabular-nums text-slate-300">{Math.round(t.elo)}</td>
                     <td className="p-3 text-right tabular-nums text-slate-300">{t.form}</td>
                     <td className="p-3 text-right tabular-nums text-slate-300">{pct(t.probabilities.group_advance)}</td>
                     <td className="p-3 text-right tabular-nums text-slate-300">{pct(t.probabilities.final)}</td>

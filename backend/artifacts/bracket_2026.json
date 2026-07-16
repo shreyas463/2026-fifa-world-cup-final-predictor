@@ -1,0 +1,1332 @@
+{
+  "is_projection": false,
+  "results_source": "Real recorded results (martj42 dataset); final & third-place are model predictions (unplayed).",
+  "as_of": "2026-07-15",
+  "schedule": [
+    {
+      "round": "Group stage",
+      "dates": "Jun 11 \u2013 27, 2026"
+    },
+    {
+      "round": "Round of 32",
+      "dates": "Jun 28 \u2013 Jul 3, 2026"
+    },
+    {
+      "round": "Round of 16",
+      "dates": "Jul 4 \u2013 7, 2026"
+    },
+    {
+      "round": "Quarterfinals",
+      "dates": "Jul 9 \u2013 11, 2026"
+    },
+    {
+      "round": "Semifinals",
+      "dates": "Jul 14 \u2013 15, 2026"
+    },
+    {
+      "round": "Third-place play-off",
+      "dates": "Saturday, Jul 18, 2026"
+    },
+    {
+      "round": "Final",
+      "dates": "Sunday, Jul 19, 2026"
+    }
+  ],
+  "groups": {
+    "A": [
+      {
+        "id": 1,
+        "name": "Mexico",
+        "flag": "\ud83c\uddf2\ud83c\uddfd",
+        "group": "A",
+        "points": 9,
+        "gf": 6,
+        "ga": 0,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 2,
+        "name": "South Africa",
+        "flag": "\ud83c\uddff\ud83c\udde6",
+        "group": "A",
+        "points": 4,
+        "gf": 2,
+        "ga": 3,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 3,
+        "name": "South Korea",
+        "flag": "\ud83c\uddf0\ud83c\uddf7",
+        "group": "A",
+        "points": 3,
+        "gf": 2,
+        "ga": 3,
+        "qualified": false,
+        "position": "3"
+      },
+      {
+        "id": 4,
+        "name": "Czech Republic",
+        "flag": "\ud83c\udde8\ud83c\uddff",
+        "group": "A",
+        "points": 1,
+        "gf": 2,
+        "ga": 6,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "B": [
+      {
+        "id": 8,
+        "name": "Switzerland",
+        "flag": "\ud83c\udde8\ud83c\udded",
+        "group": "B",
+        "points": 7,
+        "gf": 7,
+        "ga": 3,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 5,
+        "name": "Canada",
+        "flag": "\ud83c\udde8\ud83c\udde6",
+        "group": "B",
+        "points": 4,
+        "gf": 8,
+        "ga": 3,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 6,
+        "name": "Bosnia and Herzegovina",
+        "flag": "\ud83c\udde7\ud83c\udde6",
+        "group": "B",
+        "points": 4,
+        "gf": 5,
+        "ga": 6,
+        "qualified": true,
+        "position": "3"
+      },
+      {
+        "id": 7,
+        "name": "Qatar",
+        "flag": "\ud83c\uddf6\ud83c\udde6",
+        "group": "B",
+        "points": 1,
+        "gf": 2,
+        "ga": 10,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "C": [
+      {
+        "id": 9,
+        "name": "Brazil",
+        "flag": "\ud83c\udde7\ud83c\uddf7",
+        "group": "C",
+        "points": 7,
+        "gf": 7,
+        "ga": 1,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 10,
+        "name": "Morocco",
+        "flag": "\ud83c\uddf2\ud83c\udde6",
+        "group": "C",
+        "points": 7,
+        "gf": 6,
+        "ga": 3,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 12,
+        "name": "Scotland",
+        "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc73\udb40\udc63\udb40\udc74\udb40\udc7f",
+        "group": "C",
+        "points": 3,
+        "gf": 1,
+        "ga": 4,
+        "qualified": false,
+        "position": "3"
+      },
+      {
+        "id": 11,
+        "name": "Haiti",
+        "flag": "\ud83c\udded\ud83c\uddf9",
+        "group": "C",
+        "points": 0,
+        "gf": 2,
+        "ga": 8,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "D": [
+      {
+        "id": 13,
+        "name": "USA",
+        "flag": "\ud83c\uddfa\ud83c\uddf8",
+        "group": "D",
+        "points": 6,
+        "gf": 8,
+        "ga": 4,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 15,
+        "name": "Australia",
+        "flag": "\ud83c\udde6\ud83c\uddfa",
+        "group": "D",
+        "points": 4,
+        "gf": 2,
+        "ga": 2,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 14,
+        "name": "Paraguay",
+        "flag": "\ud83c\uddf5\ud83c\uddfe",
+        "group": "D",
+        "points": 4,
+        "gf": 2,
+        "ga": 4,
+        "qualified": true,
+        "position": "3"
+      },
+      {
+        "id": 16,
+        "name": "Turkey",
+        "flag": "\ud83c\uddf9\ud83c\uddf7",
+        "group": "D",
+        "points": 3,
+        "gf": 3,
+        "ga": 5,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "E": [
+      {
+        "id": 17,
+        "name": "Germany",
+        "flag": "\ud83c\udde9\ud83c\uddea",
+        "group": "E",
+        "points": 6,
+        "gf": 10,
+        "ga": 4,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 19,
+        "name": "Ivory Coast",
+        "flag": "\ud83c\udde8\ud83c\uddee",
+        "group": "E",
+        "points": 6,
+        "gf": 4,
+        "ga": 2,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 20,
+        "name": "Ecuador",
+        "flag": "\ud83c\uddea\ud83c\udde8",
+        "group": "E",
+        "points": 4,
+        "gf": 2,
+        "ga": 2,
+        "qualified": true,
+        "position": "3"
+      },
+      {
+        "id": 18,
+        "name": "Curacao",
+        "flag": "\ud83c\udde8\ud83c\uddfc",
+        "group": "E",
+        "points": 1,
+        "gf": 1,
+        "ga": 9,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "F": [
+      {
+        "id": 21,
+        "name": "Netherlands",
+        "flag": "\ud83c\uddf3\ud83c\uddf1",
+        "group": "F",
+        "points": 7,
+        "gf": 10,
+        "ga": 4,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 22,
+        "name": "Japan",
+        "flag": "\ud83c\uddef\ud83c\uddf5",
+        "group": "F",
+        "points": 5,
+        "gf": 7,
+        "ga": 3,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 23,
+        "name": "Sweden",
+        "flag": "\ud83c\uddf8\ud83c\uddea",
+        "group": "F",
+        "points": 4,
+        "gf": 7,
+        "ga": 7,
+        "qualified": true,
+        "position": "3"
+      },
+      {
+        "id": 24,
+        "name": "Tunisia",
+        "flag": "\ud83c\uddf9\ud83c\uddf3",
+        "group": "F",
+        "points": 0,
+        "gf": 2,
+        "ga": 12,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "G": [
+      {
+        "id": 25,
+        "name": "Belgium",
+        "flag": "\ud83c\udde7\ud83c\uddea",
+        "group": "G",
+        "points": 5,
+        "gf": 6,
+        "ga": 2,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 26,
+        "name": "Egypt",
+        "flag": "\ud83c\uddea\ud83c\uddec",
+        "group": "G",
+        "points": 5,
+        "gf": 5,
+        "ga": 3,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 27,
+        "name": "Iran",
+        "flag": "\ud83c\uddee\ud83c\uddf7",
+        "group": "G",
+        "points": 3,
+        "gf": 3,
+        "ga": 3,
+        "qualified": false,
+        "position": "3"
+      },
+      {
+        "id": 28,
+        "name": "New Zealand",
+        "flag": "\ud83c\uddf3\ud83c\uddff",
+        "group": "G",
+        "points": 1,
+        "gf": 4,
+        "ga": 10,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "H": [
+      {
+        "id": 29,
+        "name": "Spain",
+        "flag": "\ud83c\uddea\ud83c\uddf8",
+        "group": "H",
+        "points": 7,
+        "gf": 5,
+        "ga": 0,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 30,
+        "name": "Cape Verde",
+        "flag": "\ud83c\udde8\ud83c\uddfb",
+        "group": "H",
+        "points": 3,
+        "gf": 2,
+        "ga": 2,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 32,
+        "name": "Uruguay",
+        "flag": "\ud83c\uddfa\ud83c\uddfe",
+        "group": "H",
+        "points": 2,
+        "gf": 3,
+        "ga": 4,
+        "qualified": false,
+        "position": "3"
+      },
+      {
+        "id": 31,
+        "name": "Saudi Arabia",
+        "flag": "\ud83c\uddf8\ud83c\udde6",
+        "group": "H",
+        "points": 2,
+        "gf": 1,
+        "ga": 5,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "I": [
+      {
+        "id": 33,
+        "name": "France",
+        "flag": "\ud83c\uddeb\ud83c\uddf7",
+        "group": "I",
+        "points": 9,
+        "gf": 10,
+        "ga": 2,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 36,
+        "name": "Norway",
+        "flag": "\ud83c\uddf3\ud83c\uddf4",
+        "group": "I",
+        "points": 6,
+        "gf": 8,
+        "ga": 7,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 34,
+        "name": "Senegal",
+        "flag": "\ud83c\uddf8\ud83c\uddf3",
+        "group": "I",
+        "points": 3,
+        "gf": 8,
+        "ga": 6,
+        "qualified": true,
+        "position": "3"
+      },
+      {
+        "id": 35,
+        "name": "Iraq",
+        "flag": "\ud83c\uddee\ud83c\uddf6",
+        "group": "I",
+        "points": 0,
+        "gf": 1,
+        "ga": 12,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "J": [
+      {
+        "id": 37,
+        "name": "Argentina",
+        "flag": "\ud83c\udde6\ud83c\uddf7",
+        "group": "J",
+        "points": 9,
+        "gf": 8,
+        "ga": 1,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 39,
+        "name": "Austria",
+        "flag": "\ud83c\udde6\ud83c\uddf9",
+        "group": "J",
+        "points": 4,
+        "gf": 6,
+        "ga": 6,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 38,
+        "name": "Algeria",
+        "flag": "\ud83c\udde9\ud83c\uddff",
+        "group": "J",
+        "points": 4,
+        "gf": 5,
+        "ga": 7,
+        "qualified": true,
+        "position": "3"
+      },
+      {
+        "id": 40,
+        "name": "Jordan",
+        "flag": "\ud83c\uddef\ud83c\uddf4",
+        "group": "J",
+        "points": 0,
+        "gf": 3,
+        "ga": 8,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "K": [
+      {
+        "id": 44,
+        "name": "Colombia",
+        "flag": "\ud83c\udde8\ud83c\uddf4",
+        "group": "K",
+        "points": 7,
+        "gf": 4,
+        "ga": 1,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 41,
+        "name": "Portugal",
+        "flag": "\ud83c\uddf5\ud83c\uddf9",
+        "group": "K",
+        "points": 5,
+        "gf": 6,
+        "ga": 1,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 42,
+        "name": "DR Congo",
+        "flag": "\ud83c\udde8\ud83c\udde9",
+        "group": "K",
+        "points": 4,
+        "gf": 4,
+        "ga": 3,
+        "qualified": true,
+        "position": "3"
+      },
+      {
+        "id": 43,
+        "name": "Uzbekistan",
+        "flag": "\ud83c\uddfa\ud83c\uddff",
+        "group": "K",
+        "points": 0,
+        "gf": 2,
+        "ga": 11,
+        "qualified": false,
+        "position": "3"
+      }
+    ],
+    "L": [
+      {
+        "id": 45,
+        "name": "England",
+        "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f",
+        "group": "L",
+        "points": 7,
+        "gf": 6,
+        "ga": 2,
+        "qualified": true,
+        "position": "W"
+      },
+      {
+        "id": 46,
+        "name": "Croatia",
+        "flag": "\ud83c\udded\ud83c\uddf7",
+        "group": "L",
+        "points": 6,
+        "gf": 5,
+        "ga": 5,
+        "qualified": true,
+        "position": "R"
+      },
+      {
+        "id": 47,
+        "name": "Ghana",
+        "flag": "\ud83c\uddec\ud83c\udded",
+        "group": "L",
+        "points": 4,
+        "gf": 2,
+        "ga": 2,
+        "qualified": true,
+        "position": "3"
+      },
+      {
+        "id": 48,
+        "name": "Panama",
+        "flag": "\ud83c\uddf5\ud83c\udde6",
+        "group": "L",
+        "points": 0,
+        "gf": 0,
+        "ga": 4,
+        "qualified": false,
+        "position": "3"
+      }
+    ]
+  },
+  "knockout": [
+    {
+      "name": "Round of 32",
+      "dates": "Jun 28 \u2013 Jul 3, 2026",
+      "matches": [
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 17,
+            "name": "Germany",
+            "flag": "\ud83c\udde9\ud83c\uddea",
+            "group": "E"
+          },
+          "team_b": {
+            "id": 14,
+            "name": "Paraguay",
+            "flag": "\ud83c\uddf5\ud83c\uddfe",
+            "group": "D"
+          },
+          "score_a": 1,
+          "score_b": 1,
+          "penalties": true,
+          "played": true,
+          "predicted": false,
+          "winner_id": 14
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 33,
+            "name": "France",
+            "flag": "\ud83c\uddeb\ud83c\uddf7",
+            "group": "I"
+          },
+          "team_b": {
+            "id": 23,
+            "name": "Sweden",
+            "flag": "\ud83c\uddf8\ud83c\uddea",
+            "group": "F"
+          },
+          "score_a": 3,
+          "score_b": 0,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 33
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 2,
+            "name": "South Africa",
+            "flag": "\ud83c\uddff\ud83c\udde6",
+            "group": "A"
+          },
+          "team_b": {
+            "id": 5,
+            "name": "Canada",
+            "flag": "\ud83c\udde8\ud83c\udde6",
+            "group": "B"
+          },
+          "score_a": 0,
+          "score_b": 1,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 5
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 21,
+            "name": "Netherlands",
+            "flag": "\ud83c\uddf3\ud83c\uddf1",
+            "group": "F"
+          },
+          "team_b": {
+            "id": 10,
+            "name": "Morocco",
+            "flag": "\ud83c\uddf2\ud83c\udde6",
+            "group": "C"
+          },
+          "score_a": 1,
+          "score_b": 1,
+          "penalties": true,
+          "played": true,
+          "predicted": false,
+          "winner_id": 10
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 41,
+            "name": "Portugal",
+            "flag": "\ud83c\uddf5\ud83c\uddf9",
+            "group": "K"
+          },
+          "team_b": {
+            "id": 46,
+            "name": "Croatia",
+            "flag": "\ud83c\udded\ud83c\uddf7",
+            "group": "L"
+          },
+          "score_a": 2,
+          "score_b": 1,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 41
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 29,
+            "name": "Spain",
+            "flag": "\ud83c\uddea\ud83c\uddf8",
+            "group": "H"
+          },
+          "team_b": {
+            "id": 39,
+            "name": "Austria",
+            "flag": "\ud83c\udde6\ud83c\uddf9",
+            "group": "J"
+          },
+          "score_a": 3,
+          "score_b": 0,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 29
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 13,
+            "name": "USA",
+            "flag": "\ud83c\uddfa\ud83c\uddf8",
+            "group": "D"
+          },
+          "team_b": {
+            "id": 6,
+            "name": "Bosnia and Herzegovina",
+            "flag": "\ud83c\udde7\ud83c\udde6",
+            "group": "B"
+          },
+          "score_a": 2,
+          "score_b": 0,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 13
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 25,
+            "name": "Belgium",
+            "flag": "\ud83c\udde7\ud83c\uddea",
+            "group": "G"
+          },
+          "team_b": {
+            "id": 34,
+            "name": "Senegal",
+            "flag": "\ud83c\uddf8\ud83c\uddf3",
+            "group": "I"
+          },
+          "score_a": 3,
+          "score_b": 2,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 25
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 9,
+            "name": "Brazil",
+            "flag": "\ud83c\udde7\ud83c\uddf7",
+            "group": "C"
+          },
+          "team_b": {
+            "id": 22,
+            "name": "Japan",
+            "flag": "\ud83c\uddef\ud83c\uddf5",
+            "group": "F"
+          },
+          "score_a": 2,
+          "score_b": 1,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 9
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 19,
+            "name": "Ivory Coast",
+            "flag": "\ud83c\udde8\ud83c\uddee",
+            "group": "E"
+          },
+          "team_b": {
+            "id": 36,
+            "name": "Norway",
+            "flag": "\ud83c\uddf3\ud83c\uddf4",
+            "group": "I"
+          },
+          "score_a": 1,
+          "score_b": 2,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 36
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 1,
+            "name": "Mexico",
+            "flag": "\ud83c\uddf2\ud83c\uddfd",
+            "group": "A"
+          },
+          "team_b": {
+            "id": 20,
+            "name": "Ecuador",
+            "flag": "\ud83c\uddea\ud83c\udde8",
+            "group": "E"
+          },
+          "score_a": 2,
+          "score_b": 0,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 1
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 45,
+            "name": "England",
+            "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f",
+            "group": "L"
+          },
+          "team_b": {
+            "id": 42,
+            "name": "DR Congo",
+            "flag": "\ud83c\udde8\ud83c\udde9",
+            "group": "K"
+          },
+          "score_a": 2,
+          "score_b": 1,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 45
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 37,
+            "name": "Argentina",
+            "flag": "\ud83c\udde6\ud83c\uddf7",
+            "group": "J"
+          },
+          "team_b": {
+            "id": 30,
+            "name": "Cape Verde",
+            "flag": "\ud83c\udde8\ud83c\uddfb",
+            "group": "H"
+          },
+          "score_a": 3,
+          "score_b": 2,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 37
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 15,
+            "name": "Australia",
+            "flag": "\ud83c\udde6\ud83c\uddfa",
+            "group": "D"
+          },
+          "team_b": {
+            "id": 26,
+            "name": "Egypt",
+            "flag": "\ud83c\uddea\ud83c\uddec",
+            "group": "G"
+          },
+          "score_a": 1,
+          "score_b": 1,
+          "penalties": true,
+          "played": true,
+          "predicted": false,
+          "winner_id": 26
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 8,
+            "name": "Switzerland",
+            "flag": "\ud83c\udde8\ud83c\udded",
+            "group": "B"
+          },
+          "team_b": {
+            "id": 38,
+            "name": "Algeria",
+            "flag": "\ud83c\udde9\ud83c\uddff",
+            "group": "J"
+          },
+          "score_a": 2,
+          "score_b": 0,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 8
+        },
+        {
+          "round": "Round of 32",
+          "team_a": {
+            "id": 44,
+            "name": "Colombia",
+            "flag": "\ud83c\udde8\ud83c\uddf4",
+            "group": "K"
+          },
+          "team_b": {
+            "id": 47,
+            "name": "Ghana",
+            "flag": "\ud83c\uddec\ud83c\udded",
+            "group": "L"
+          },
+          "score_a": 1,
+          "score_b": 0,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 44
+        }
+      ]
+    },
+    {
+      "name": "Round of 16",
+      "dates": "Jul 4 \u2013 7, 2026",
+      "matches": [
+        {
+          "round": "Round of 16",
+          "team_a": {
+            "id": 14,
+            "name": "Paraguay",
+            "flag": "\ud83c\uddf5\ud83c\uddfe",
+            "group": "D"
+          },
+          "team_b": {
+            "id": 33,
+            "name": "France",
+            "flag": "\ud83c\uddeb\ud83c\uddf7",
+            "group": "I"
+          },
+          "score_a": 0,
+          "score_b": 1,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 33
+        },
+        {
+          "round": "Round of 16",
+          "team_a": {
+            "id": 5,
+            "name": "Canada",
+            "flag": "\ud83c\udde8\ud83c\udde6",
+            "group": "B"
+          },
+          "team_b": {
+            "id": 10,
+            "name": "Morocco",
+            "flag": "\ud83c\uddf2\ud83c\udde6",
+            "group": "C"
+          },
+          "score_a": 0,
+          "score_b": 3,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 10
+        },
+        {
+          "round": "Round of 16",
+          "team_a": {
+            "id": 41,
+            "name": "Portugal",
+            "flag": "\ud83c\uddf5\ud83c\uddf9",
+            "group": "K"
+          },
+          "team_b": {
+            "id": 29,
+            "name": "Spain",
+            "flag": "\ud83c\uddea\ud83c\uddf8",
+            "group": "H"
+          },
+          "score_a": 0,
+          "score_b": 1,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 29
+        },
+        {
+          "round": "Round of 16",
+          "team_a": {
+            "id": 13,
+            "name": "USA",
+            "flag": "\ud83c\uddfa\ud83c\uddf8",
+            "group": "D"
+          },
+          "team_b": {
+            "id": 25,
+            "name": "Belgium",
+            "flag": "\ud83c\udde7\ud83c\uddea",
+            "group": "G"
+          },
+          "score_a": 1,
+          "score_b": 4,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 25
+        },
+        {
+          "round": "Round of 16",
+          "team_a": {
+            "id": 9,
+            "name": "Brazil",
+            "flag": "\ud83c\udde7\ud83c\uddf7",
+            "group": "C"
+          },
+          "team_b": {
+            "id": 36,
+            "name": "Norway",
+            "flag": "\ud83c\uddf3\ud83c\uddf4",
+            "group": "I"
+          },
+          "score_a": 1,
+          "score_b": 2,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 36
+        },
+        {
+          "round": "Round of 16",
+          "team_a": {
+            "id": 1,
+            "name": "Mexico",
+            "flag": "\ud83c\uddf2\ud83c\uddfd",
+            "group": "A"
+          },
+          "team_b": {
+            "id": 45,
+            "name": "England",
+            "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f",
+            "group": "L"
+          },
+          "score_a": 2,
+          "score_b": 3,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 45
+        },
+        {
+          "round": "Round of 16",
+          "team_a": {
+            "id": 37,
+            "name": "Argentina",
+            "flag": "\ud83c\udde6\ud83c\uddf7",
+            "group": "J"
+          },
+          "team_b": {
+            "id": 26,
+            "name": "Egypt",
+            "flag": "\ud83c\uddea\ud83c\uddec",
+            "group": "G"
+          },
+          "score_a": 3,
+          "score_b": 2,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 37
+        },
+        {
+          "round": "Round of 16",
+          "team_a": {
+            "id": 8,
+            "name": "Switzerland",
+            "flag": "\ud83c\udde8\ud83c\udded",
+            "group": "B"
+          },
+          "team_b": {
+            "id": 44,
+            "name": "Colombia",
+            "flag": "\ud83c\udde8\ud83c\uddf4",
+            "group": "K"
+          },
+          "score_a": 0,
+          "score_b": 0,
+          "penalties": true,
+          "played": true,
+          "predicted": false,
+          "winner_id": 8
+        }
+      ]
+    },
+    {
+      "name": "Quarterfinals",
+      "dates": "Jul 9 \u2013 11, 2026",
+      "matches": [
+        {
+          "round": "Quarterfinals",
+          "team_a": {
+            "id": 33,
+            "name": "France",
+            "flag": "\ud83c\uddeb\ud83c\uddf7",
+            "group": "I"
+          },
+          "team_b": {
+            "id": 10,
+            "name": "Morocco",
+            "flag": "\ud83c\uddf2\ud83c\udde6",
+            "group": "C"
+          },
+          "score_a": 2,
+          "score_b": 0,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 33
+        },
+        {
+          "round": "Quarterfinals",
+          "team_a": {
+            "id": 29,
+            "name": "Spain",
+            "flag": "\ud83c\uddea\ud83c\uddf8",
+            "group": "H"
+          },
+          "team_b": {
+            "id": 25,
+            "name": "Belgium",
+            "flag": "\ud83c\udde7\ud83c\uddea",
+            "group": "G"
+          },
+          "score_a": 2,
+          "score_b": 1,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 29
+        },
+        {
+          "round": "Quarterfinals",
+          "team_a": {
+            "id": 36,
+            "name": "Norway",
+            "flag": "\ud83c\uddf3\ud83c\uddf4",
+            "group": "I"
+          },
+          "team_b": {
+            "id": 45,
+            "name": "England",
+            "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f",
+            "group": "L"
+          },
+          "score_a": 1,
+          "score_b": 2,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 45
+        },
+        {
+          "round": "Quarterfinals",
+          "team_a": {
+            "id": 37,
+            "name": "Argentina",
+            "flag": "\ud83c\udde6\ud83c\uddf7",
+            "group": "J"
+          },
+          "team_b": {
+            "id": 8,
+            "name": "Switzerland",
+            "flag": "\ud83c\udde8\ud83c\udded",
+            "group": "B"
+          },
+          "score_a": 3,
+          "score_b": 1,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 37
+        }
+      ]
+    },
+    {
+      "name": "Semifinals",
+      "dates": "Jul 14 \u2013 15, 2026",
+      "matches": [
+        {
+          "round": "Semifinals",
+          "team_a": {
+            "id": 33,
+            "name": "France",
+            "flag": "\ud83c\uddeb\ud83c\uddf7",
+            "group": "I"
+          },
+          "team_b": {
+            "id": 29,
+            "name": "Spain",
+            "flag": "\ud83c\uddea\ud83c\uddf8",
+            "group": "H"
+          },
+          "score_a": 0,
+          "score_b": 2,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 29
+        },
+        {
+          "round": "Semifinals",
+          "team_a": {
+            "id": 45,
+            "name": "England",
+            "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f",
+            "group": "L"
+          },
+          "team_b": {
+            "id": 37,
+            "name": "Argentina",
+            "flag": "\ud83c\udde6\ud83c\uddf7",
+            "group": "J"
+          },
+          "score_a": 1,
+          "score_b": 2,
+          "penalties": false,
+          "played": true,
+          "predicted": false,
+          "winner_id": 37
+        }
+      ]
+    }
+  ],
+  "final": {
+    "round": "Final",
+    "dates": "Sunday, Jul 19, 2026",
+    "team_a": {
+      "id": 29,
+      "name": "Spain",
+      "flag": "\ud83c\uddea\ud83c\uddf8",
+      "group": "H"
+    },
+    "team_b": {
+      "id": 37,
+      "name": "Argentina",
+      "flag": "\ud83c\udde6\ud83c\uddf7",
+      "group": "J"
+    },
+    "score_a": 1,
+    "score_b": 0,
+    "penalties": false,
+    "played": false,
+    "predicted": true,
+    "winner_id": 29,
+    "win_probabilities": {
+      "team_a": 0.482,
+      "draw": 0.262,
+      "team_b": 0.256
+    }
+  },
+  "third_place": {
+    "round": "Third-place play-off",
+    "dates": "Saturday, Jul 18, 2026",
+    "team_a": {
+      "id": 33,
+      "name": "France",
+      "flag": "\ud83c\uddeb\ud83c\uddf7",
+      "group": "I"
+    },
+    "team_b": {
+      "id": 45,
+      "name": "England",
+      "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f",
+      "group": "L"
+    },
+    "score_a": 2,
+    "score_b": 1,
+    "penalties": false,
+    "played": false,
+    "predicted": true,
+    "winner_id": 33,
+    "win_probabilities": {
+      "team_a": 0.491,
+      "draw": 0.26,
+      "team_b": 0.249
+    }
+  },
+  "champion": {
+    "id": 29,
+    "name": "Spain",
+    "flag": "\ud83c\uddea\ud83c\uddf8",
+    "confederation": "UEFA",
+    "group": "H",
+    "fifa_points": 1912.34,
+    "form": 80,
+    "squad_value_m": 1000,
+    "availability": 92,
+    "wc_titles": 1,
+    "wc_appearances": 17,
+    "host": false,
+    "fifa_rank": 3,
+    "sentiment": 88.0,
+    "elo": 2163.2,
+    "attack": 1.95,
+    "defense": 0.28,
+    "real_data": true,
+    "predicted": true
+  },
+  "runner_up": {
+    "id": 37,
+    "name": "Argentina",
+    "flag": "\ud83c\udde6\ud83c\uddf7",
+    "group": "J"
+  },
+  "third": {
+    "id": 33,
+    "name": "France",
+    "flag": "\ud83c\uddeb\ud83c\uddf7",
+    "group": "I"
+  }
+}

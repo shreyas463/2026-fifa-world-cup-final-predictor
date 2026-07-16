@@ -14,13 +14,14 @@ from dataclasses import dataclass
 import numpy as np
 
 from ..data.teams import Team, groups_map, load_teams
+from .match import effective_elo
 
 STAGES = ["r32", "r16", "qf", "sf", "final", "winner"]
 KO_ROUND_NAMES = ["Round of 32", "Round of 16", "Quarterfinals", "Semifinals", "Final"]
 
 LEAGUE_AVG_GOALS = 1.35
-GOAL_SPREAD_K = 0.55
-HOME_ADV = 65.0
+GOAL_SPREAD_K = 0.45   # single-match variance: keeps tournament odds realistic
+HOME_ADV = 100.0
 
 
 @dataclass
@@ -33,7 +34,7 @@ class _T:
 
 
 def _index(teams: list[Team]) -> dict[int, _T]:
-    return {t.id: _T(t.id, float(t.fifa_points), t.attack, t.defense, t.host) for t in teams}
+    return {t.id: _T(t.id, effective_elo(t), t.attack, t.defense, t.host) for t in teams}
 
 
 def _standard_bracket(n: int) -> list[int]:

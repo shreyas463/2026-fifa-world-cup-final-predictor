@@ -1,227 +1,198 @@
 {
   "best_model": "Logistic Regression",
   "metrics": {
-    "accuracy": 0.5638,
-    "log_loss": 0.9447,
-    "precision": 0.3762,
-    "recall": 0.4842,
-    "f1": 0.4232,
-    "roc_auc": 0.6796,
-    "brier": 0.558
+    "accuracy": 0.6057,
+    "log_loss": 0.8627,
+    "precision": 0.3996,
+    "recall": 0.506,
+    "f1": 0.4445,
+    "roc_auc": 0.7438,
+    "brier": 0.5068
   },
   "model_comparison": {
     "Logistic Regression": {
-      "accuracy": 0.5638,
-      "log_loss": 0.9447,
-      "precision": 0.3762,
-      "recall": 0.4842,
-      "f1": 0.4232,
-      "roc_auc": 0.6796,
-      "brier": 0.558
+      "accuracy": 0.6057,
+      "log_loss": 0.8627,
+      "precision": 0.3996,
+      "recall": 0.506,
+      "f1": 0.4445,
+      "roc_auc": 0.7438,
+      "brier": 0.5068
     },
     "Random Forest": {
-      "accuracy": 0.556,
-      "log_loss": 0.9538,
-      "precision": 0.3707,
-      "recall": 0.4777,
-      "f1": 0.4174,
-      "roc_auc": 0.678,
-      "brier": 0.5643
+      "accuracy": 0.6054,
+      "log_loss": 0.866,
+      "precision": 0.4008,
+      "recall": 0.5052,
+      "f1": 0.4445,
+      "roc_auc": 0.7458,
+      "brier": 0.5083
     },
     "Gradient Boosting": {
-      "accuracy": 0.569,
-      "log_loss": 0.9599,
-      "precision": 0.4642,
-      "recall": 0.4937,
-      "f1": 0.4497,
-      "roc_auc": 0.6758,
-      "brier": 0.5687
+      "accuracy": 0.6057,
+      "log_loss": 0.8629,
+      "precision": 0.5303,
+      "recall": 0.5071,
+      "f1": 0.4501,
+      "roc_auc": 0.7446,
+      "brier": 0.507
     },
     "Poisson (baseline)": {
-      "accuracy": 0.5664,
-      "log_loss": 0.9681,
-      "precision": 0.5443,
-      "recall": 0.4872,
-      "f1": 0.4286,
-      "roc_auc": 0.687,
-      "brier": 0.5678
+      "accuracy": 0.6065,
+      "log_loss": 0.8937,
+      "precision": 0.3981,
+      "recall": 0.5093,
+      "f1": 0.4459,
+      "roc_auc": 0.7395,
+      "brier": 0.5228
     }
   },
   "validation_log_loss": {
-    "Logistic Regression": 0.975,
-    "Random Forest": 0.9874,
-    "Gradient Boosting": 1.0062
+    "Logistic Regression": 0.855,
+    "Random Forest": 0.8609,
+    "Gradient Boosting": 0.8608
   },
   "overfitting_check": {
-    "train_accuracy": 0.5629,
-    "test_accuracy": 0.5638,
-    "accuracy_gap": -0.0009,
-    "train_log_loss": 0.9488,
-    "test_log_loss": 0.9447
+    "train_accuracy": 0.5818,
+    "test_accuracy": 0.6057,
+    "accuracy_gap": -0.0239,
+    "train_log_loss": 0.8998,
+    "test_log_loss": 0.8627
   },
   "confusion_matrix": {
     "labels": [
-      "A win",
+      "Home win",
       "Draw",
-      "B win"
+      "Away win"
     ],
     "matrix": [
       [
-        225,
+        1456,
         0,
-        77
+        191
       ],
       [
-        94,
+        527,
         0,
-        78
+        278
       ],
       [
-        86,
+        377,
         0,
-        208
+        653
       ]
     ]
   },
   "feature_importance": [
     {
-      "feature": "rating_diff",
-      "importance": 0.2602
+      "feature": "elo_diff",
+      "importance": 0.5026
+    },
+    {
+      "feature": "ga_diff",
+      "importance": 0.1601
     },
     {
       "feature": "home_advantage",
-      "importance": 0.1901
-    },
-    {
-      "feature": "sentiment_diff",
-      "importance": 0.1315
-    },
-    {
-      "feature": "squad_diff",
-      "importance": 0.0701
-    },
-    {
-      "feature": "experience_diff",
-      "importance": 0.0624
+      "importance": 0.1307
     },
     {
       "feature": "h2h_diff",
-      "importance": 0.0579
-    },
-    {
-      "feature": "attack_a",
-      "importance": 0.0481
+      "importance": 0.1163
     },
     {
       "feature": "form_diff",
-      "importance": 0.0413
+      "importance": 0.0567
     },
     {
-      "feature": "availability_diff",
-      "importance": 0.0372
-    },
-    {
-      "feature": "attack_b",
-      "importance": 0.0331
-    },
-    {
-      "feature": "defense_a",
-      "importance": 0.0262
-    },
-    {
-      "feature": "defense_b",
-      "importance": 0.0228
-    },
-    {
-      "feature": "attack_vs_defense",
-      "importance": 0.0191
+      "feature": "gf_diff",
+      "importance": 0.0336
     }
   ],
   "calibration_curve": [
     {
-      "predicted": 0.072,
-      "observed": 0.091,
-      "count": 44
+      "predicted": 0.052,
+      "observed": 0.056,
+      "count": 248
     },
     {
-      "predicted": 0.153,
-      "observed": 0.172,
-      "count": 122
+      "predicted": 0.152,
+      "observed": 0.109,
+      "count": 339
     },
     {
       "predicted": 0.25,
-      "observed": 0.224,
-      "count": 116
+      "observed": 0.254,
+      "count": 334
     },
     {
-      "predicted": 0.352,
-      "observed": 0.376,
-      "count": 117
+      "predicted": 0.349,
+      "observed": 0.288,
+      "count": 358
     },
     {
-      "predicted": 0.446,
-      "observed": 0.393,
-      "count": 122
+      "predicted": 0.45,
+      "observed": 0.427,
+      "count": 433
     },
     {
-      "predicted": 0.551,
-      "observed": 0.515,
-      "count": 99
+      "predicted": 0.553,
+      "observed": 0.501,
+      "count": 419
     },
     {
-      "predicted": 0.644,
-      "observed": 0.698,
-      "count": 86
+      "predicted": 0.649,
+      "observed": 0.599,
+      "count": 421
     },
     {
-      "predicted": 0.746,
-      "observed": 0.756,
-      "count": 45
+      "predicted": 0.75,
+      "observed": 0.744,
+      "count": 438
     },
     {
-      "predicted": 0.837,
-      "observed": 0.875,
-      "count": 16
+      "predicted": 0.845,
+      "observed": 0.866,
+      "count": 381
+    },
+    {
+      "predicted": 0.932,
+      "observed": 0.946,
+      "count": 111
     }
   ],
   "training": {
-    "n_matches": 3840,
-    "n_train": 2304,
-    "n_validation": 768,
-    "n_test": 768,
+    "n_matches": 32400,
+    "n_train": 26607,
+    "n_validation": 2311,
+    "n_test": 3482,
     "features": [
-      "rating_diff",
+      "elo_diff",
       "form_diff",
-      "attack_a",
-      "defense_a",
-      "attack_b",
-      "defense_b",
-      "attack_vs_defense",
+      "gf_diff",
+      "ga_diff",
       "h2h_diff",
-      "experience_diff",
-      "squad_diff",
-      "availability_diff",
-      "sentiment_diff",
       "home_advantage"
     ],
     "class_labels": [
-      "A win",
+      "Home win",
       "Draw",
-      "B win"
-    ]
+      "Away win"
+    ],
+    "history_span": "1872-11-30 to 2026-07-15",
+    "total_internationals": 49518,
+    "split": "chronological \u2014 train <2021, validation 2021\u2013mid-2023, test mid-2023 onward"
   },
   "data_sources": [
-    "Real 2026 Final Draw (5 Dec 2025) \u2014 FIFA.com / Wikipedia",
-    "Real FIFA/Coca-Cola Men's World Ranking points (July 2026 snapshot)",
-    "World Cup titles & appearances \u2014 historical record",
-    "Fan sentiment \u2014 social-media positivity/buzz (curated, pluggable to X API)",
-    "Reproducible synthetic match history sampled from latent team strengths"
+    "Real international results 1872\u20132026 \u2014 martj42/international_results (49k+ matches)",
+    "World-Football-style Elo replayed over the full history (importance & margin weighted)",
+    "Real FIFA ranking points (July 2026) & World Cup pedigree \u2014 data/teams.py",
+    "Fan sentiment (curated, pluggable to X API) applied as a current-context adjustment"
   ],
   "limitations": [
-    "Trained on a synthetic, generatively-sampled history \u2014 not live match feeds.",
-    "Eight lower-ranked qualifiers use best-estimate FIFA points (outside the public top-60).",
-    "Availability (injuries) and fan sentiment are curated snapshots, not live feeds.",
-    "Cannot model red cards, in-game tactics or penalty-shootout variance directly.",
+    "Injuries/availability & fan sentiment are current-context adjustments, not historical features.",
+    "Three-way outcome (incl. draws) is inherently hard \u2014 strong models sit ~50-55% accuracy.",
+    "Elo cannot see red cards, in-game tactics or shootout variance directly.",
     "Probabilities are calibrated estimates, not guarantees."
   ]
 }

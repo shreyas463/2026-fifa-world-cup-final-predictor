@@ -2,7 +2,12 @@
 backend/.venv/
 __pycache__/
 *.pyc
-backend/artifacts/*.joblib
+
+# Raw dataset (cloned from martj42/international_results; ~7MB). Fetch with:
+#   git clone https://github.com/martj42/international_results.git backend/data_raw
+# Cached artifacts (current_form.json, bracket_2026.json, model.joblib) are
+# committed so the app runs without it.
+backend/data_raw/
 
 # Node / frontend
 frontend/node_modules/

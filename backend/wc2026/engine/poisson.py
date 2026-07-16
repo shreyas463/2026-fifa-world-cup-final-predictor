@@ -6,11 +6,10 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..ml.features import HOME_ADV_RATING
-
 LEAGUE_AVG_GOALS = 1.35
 GOAL_SPREAD_K = 0.55
 MAX_GOALS = 10
+HOME_ADV_RATING = 100.0  # Elo-point bump for the home/host side
 
 
 def expected_goals(rating_a: float, rating_b: float, home_advantage: int = 0,

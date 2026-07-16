@@ -56,6 +56,8 @@ export interface Team {
   host: boolean;
   fifa_rank: number;
   sentiment: number;
+  elo: number;
+  real_data: boolean;
   attack: number;
   defense: number;
   probabilities: StageProbs;
@@ -79,6 +81,7 @@ export interface MatchPrediction {
   expected_goals: { team_a: number; team_b: number };
   predicted_score: { team_a: number; team_b: number };
   head_to_head: { year: number; team_a: string; team_b: string; score_a: number; score_b: number }[];
+  head_to_head_note?: string;
   form_comparison: { team_a: number; team_b: number };
   ranking_comparison: { team_a: number; team_b: number };
   key_factors: { factor: string; favours: string; detail: string; weight: number }[];
@@ -90,10 +93,13 @@ export interface KnockoutMatch {
   dates?: string;
   team_a: { id: number; name: string; flag: string; group: string };
   team_b: { id: number; name: string; flag: string; group: string };
-  score_a?: number;
-  score_b?: number;
+  score_a?: number | null;
+  score_b?: number | null;
   penalties?: boolean;
-  winner_id: number;
+  played?: boolean;
+  predicted?: boolean;
+  winner_id: number | null;
+  win_probabilities?: { team_a: number; draw: number; team_b: number };
 }
 
 interface BracketTeam {
@@ -104,12 +110,14 @@ interface BracketTeam {
 
 export interface Bracket {
   is_projection: boolean;
+  results_source?: string;
+  as_of?: string;
   schedule: { round: string; dates: string }[];
   groups: Record<string, (BracketTeam & { group: string; qualified: boolean; position: string })[]>;
   knockout: { name: string; dates: string; matches: KnockoutMatch[] }[];
   final: KnockoutMatch & { dates: string };
   third_place: KnockoutMatch & { dates: string };
-  champion: Team;
+  champion: Team & { predicted?: boolean };
   runner_up: BracketTeam;
   third: BracketTeam;
 }
@@ -138,7 +146,17 @@ export interface ModelMetrics {
   confusion_matrix: { labels: string[]; matrix: number[][] };
   feature_importance: { feature: string; importance: number }[];
   calibration_curve: { predicted: number; observed: number; count: number }[];
-  training: { n_matches: number; n_train: number; n_validation: number; n_test: number; features: string[]; class_labels: string[] };
+  training: {
+    n_matches: number;
+    n_train: number;
+    n_validation: number;
+    n_test: number;
+    features: string[];
+    class_labels: string[];
+    history_span?: string;
+    total_internationals?: number;
+    split?: string;
+  };
   data_sources: string[];
   limitations: string[];
 }

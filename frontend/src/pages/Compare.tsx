@@ -86,6 +86,7 @@ function ComparisonView({ data }: { data: Awaited<ReturnType<typeof api.comparis
   }));
 
   const rows: { label: string; av: number | string; bv: number | string; aRaw: number; bRaw: number; higher?: "lower" }[] = [
+    { label: "Elo rating", av: Math.round(a.elo), bv: Math.round(b.elo), aRaw: a.elo, bRaw: b.elo },
     { label: "FIFA rank (field)", av: `#${a.fifa_rank}`, bv: `#${b.fifa_rank}`, aRaw: -a.fifa_rank, bRaw: -b.fifa_rank },
     { label: "FIFA points", av: Math.round(a.fifa_points), bv: Math.round(b.fifa_points), aRaw: a.fifa_points, bRaw: b.fifa_points },
     { label: "Recent form", av: a.form, bv: b.form, aRaw: a.form, bRaw: b.form },

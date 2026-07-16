@@ -7,142 +7,129 @@
 ## 1. Objective
 
 Estimate, as calibrated probabilities, how far each of the 48 teams in the 2026
-FIFA World Cup is likely to progress — culminating in each nation's probability
-of winning — and expose those estimates through an interactive web app built on
-**real** tournament data.
+FIFA World Cup is likely to progress — trained on **real historical match
+results** and reported against the **real recorded 2026 tournament**.
 
-## 2. Data (what's real, what's estimated)
+## 2. Data
 
-**Real, verified:**
-- **The 2026 Final Draw** (5 Dec 2025): all 48 qualified teams and groups A–L,
-  with hosts USA/Canada/Mexico seeded as group heads.
-  *Sources: FIFA.com, Wikipedia "2026 FIFA World Cup draw".*
-- **FIFA/Coca-Cola Men's World Ranking points** (July 2026 snapshot) for 40 of
-  the 48 teams. *Source: FIFA Men's World Ranking.*
-- **World Cup titles & appearances** — historical record.
+- **Match history:** [martj42/international_results](https://github.com/martj42/international_results)
+  — **49,518 real internationals, 1872–2026** (results.csv + shootouts.csv). This
+  dataset also contains the recorded 2026 World Cup (104 matches), through the
+  semifinals.
+- **2026 field & draw:** the real Final Draw (5 Dec 2025), 48 teams, groups A–L.
+- **FIFA ranking points** (July 2026) and **World Cup pedigree** — real; eight
+  lower-ranked qualifiers use best-estimate points (flagged in `data/teams.py`).
+- **Fan sentiment** (positivity, buzz, momentum) — curated snapshot behind a
+  pluggable `SentimentProvider`; **squad availability** — injury/fitness proxy.
 
-**Best-estimate (flagged `(est)` in `data/teams.py`):**
-- FIFA points for eight lower-ranked / playoff qualifiers outside the public
-  top-60 table: Bosnia, Haiti, Curaçao, New Zealand, Cape Verde, Iraq, Jordan,
-  Ghana.
+## 3. Elo replay & feature engineering
 
-**Curated / illustrative (documented, pluggable):**
-- **Squad availability** (injury/fitness proxy) and **fan sentiment**
-  (social-media positivity, buzz, momentum). Sentiment is served through a
-  `SentimentProvider` interface with an `XApiSentimentProvider` stub for a live
-  X pipeline; live scraping needs an API token and is not enabled offline.
+Every match in history is replayed into a **World-Football-style Elo** —
+importance-weighted (World Cup > continental > qualifier > friendly) and
+goal-margin-weighted, with a home-advantage term. Ratings settle in a realistic
+band (top sides ≈ 2050–2160).
 
-Attacking / defensive goal rates are derived from ranking strength and form.
+Six **leakage-free** features are built from *pre-match* state only, then state
+is updated after the result:
 
-## 3. Avoiding data leakage
+| Feature | Meaning |
+|---------|---------|
+| `elo_diff` | home Elo − away Elo |
+| `form_diff` | recent-form difference (last-10 points) |
+| `gf_diff` / `ga_diff` | rolling goals-for / goals-against difference |
+| `h2h_diff` | recent head-to-head goal difference |
+| `home_advantage` | 1 at home, 0 at a neutral venue |
 
-Every feature row is built **only from pre-match, observable statistics**, and
-rolling state is updated strictly *after* each result is recorded. The **same**
-`build_feature_row()` runs during training and live inference, so inputs are
-constructed identically in both phases.
+The **same** `build_inference_row()` runs at prediction time. Signals absent from
+match history — **squad availability (injuries)** and **fan sentiment** — are
+applied as small, documented adjustments to each side's effective Elo, so the
+model still "considers" them without fabricating historical values.
 
-## 4. Features (13)
+## 4. Training, validation & testing (chronological)
 
-FIFA-points difference · recent-form difference · attack & defence rates (both
-sides) · attack-vs-defence matchup · **recent head-to-head** · **World Cup
-pedigree** · **squad value** · **squad availability (injuries)** · **fan
-sentiment** · home/host advantage.
+The honest way to test a match model is on the **future**: fit on the past, test
+on the most recent games. Split by date:
 
-## 5. Model training, validation & testing
-
-Data is split **60 / 20 / 20** into train / validation / test (2,304 / 768 / 768
-matches). Models are fit on train, **selected on validation** log-loss, and
-reported on the held-out **test** set — the test set is never used for selection.
+- **Train:** before 2021 — 26,607 matches
+- **Validation:** 2021 → mid-2023 — 2,311 matches (model selection)
+- **Test:** mid-2023 → 2026 — 3,482 matches (held out)
 
 | Model | Accuracy | Log-loss | ROC-AUC | Brier |
 |-------|:-------:|:--------:|:-------:|:-----:|
-| **Logistic Regression** ⭐ | **0.564** | **0.945** | 0.680 | 0.558 |
-| Random Forest | 0.556 | 0.954 | 0.678 | 0.564 |
-| Gradient Boosting | 0.569 | 0.960 | 0.676 | 0.569 |
-| Poisson (baseline) | 0.566 | 0.968 | 0.687 | 0.568 |
+| **Logistic Regression** ⭐ | **0.606** | **0.863** | 0.744 | 0.507 |
+| Random Forest | 0.605 | 0.866 | 0.746 | 0.508 |
+| Gradient Boosting | 0.606 | 0.863 | 0.745 | 0.507 |
+| Poisson (baseline) | 0.607 | 0.894 | 0.740 | 0.523 |
 
-**Overfitting check:** train accuracy **0.563** vs test **0.564** (gap
-**−0.001**) — the model generalises; it is not memorising the training set.
+**Overfitting check:** train accuracy **0.582** vs test **0.606** (gap
+**−0.024** — the test set is, if anything, slightly *easier*; the model is not
+memorising). Precision 0.40 / recall 0.51 / F1 0.44 (macro, three classes).
 
-**Most important features:** `rating_diff` (FIFA points) ≫ `home_advantage` >
-`sentiment_diff` > `squad_diff` > `experience_diff` — notably, **fan sentiment is
-the third-strongest signal** the model uses.
+**Feature importance:** `elo_diff` (0.50) ≫ `ga_diff` (0.16) ≈ `home_advantage`
+(0.13) ≈ `h2h_diff` (0.12) > `form_diff` (0.06) > `gf_diff` (0.03).
 
-Adding head-to-head, availability, pedigree and sentiment lifted three-way
-accuracy from ~0.49 (rankings only) to **~0.56**. Predicting a three-way result
-*with draws* is hard — sharp bookmaker models sit ~50–55% — so this is a solid,
-honestly-reported result with well-ranked, reasonably-calibrated probabilities.
+Training on real history lifted three-way accuracy from ~0.49 (synthetic) to
+**~0.61** on real held-out internationals — strong for an outcome that includes
+draws (sharp bookmaker models sit ~50–55%).
 
-## 6. Match prediction & simulation
+## 5. Match prediction & simulation
 
-- **Match engine:** trained classifier → win/draw/loss; Poisson scoreline model
-  → expected goals + most-likely score; plus head-to-head, form/ranking and key
-  factors (now including availability and sentiment).
+- **Match engine:** the real-trained classifier gives win/draw/loss; a Poisson
+  model gives expected goals + scoreline; the UI shows **real past meetings**
+  (from the dataset) and the key factors driving the call.
 - **Monte Carlo:** plays the full 48-team format (12 groups → best-32 →
-  knockouts, penalty tiebreaks) thousands of times; 5,000 runs in ~2–3 s.
+  knockouts, penalty tiebreaks) thousands of times on real Elo strengths.
 
-## 7. The bracket (authored, deterministic — not random)
+## 6. The bracket — real results, predicted finale
 
-The official **Bracket** page is a fixed, editable projection, **not** a random
-simulation and **not** scraped results:
+The Bracket page is built from the **actual recorded 2026 results**:
 
-- Group qualifiers and knockout winners are decided by **real FIFA strength**.
-- One scripted upset (**Spain beat France** in the semis) realises the specified
-  final. All other results follow "higher-ranked advances."
-- Scorelines are **model-projected and deterministic**; the schedule is real
-  (Final Sun 19 Jul, third-place Fri 17 Jul).
+- **Group stage → semifinals:** real scorelines for all 30 knockout matches
+  (penalty shootouts resolved from shootouts.csv). Examples: Spain 3-0 Austria,
+  Germany 1-1 Paraguay (Paraguay on pens), France 0-2 Spain (SF).
+- **Final (Sun 19 Jul) & third-place (Sat 18 Jul):** genuinely **unplayed** as of
+  the snapshot → the model predicts **🇪🇸 Spain 1-0 🇦🇷 Argentina** (Spain 48% /
+  draw 26% / Argentina 26%) and **🇫🇷 France** over 🏴 England for third.
 
-Resulting scenario:
+## 7. Results — the predicted winner 🏆
 
-| Stage | Result |
-|-------|--------|
-| Semifinal | 🇪🇸 Spain 2–1 🇫🇷 France · 🇦🇷 Argentina 2–1 🏴 England |
-| Third place (Fri 17 Jul) | 🇫🇷 France 2–1 🏴 England |
-| **Final (Sun 19 Jul)** | 🇪🇸 Spain 1–1 🇦🇷 **Argentina** (Argentina on penalties) |
-
-> Verified real 2026 match results aren't available in any dataset this project
-> can access, so these scorelines are a coherent projection, not fact. To use
-> real results, edit `engine/bracket.py` — the data flow renders them verbatim.
-
-## 8. Results — the predicted winner 🏆
-
-From **5,000 Monte Carlo simulations** on the real draw and FIFA points:
+From **5,000 Monte Carlo simulations** on the real Elo-replayed strengths:
 
 | # | Team | Win title | Reach final | Advance from group |
 |---|------|:--------:|:-----------:|:------------------:|
-| 1 | 🇦🇷 **Argentina** | **24.3%** | 38.2% | 99.9% |
-| 2 | 🇫🇷 France | 23.6% | 37.8% | 99.7% |
-| 3 | 🇪🇸 Spain | 19.7% | 34.6% | 100% |
-| 4 | 🏴 England | 11.3% | 21.5% | 99.9% |
-| 5 | 🇲🇦 Morocco | 4.2% | 10.8% | 99.2% |
-| 6 | 🇧🇷 Brazil | 4.2% | 10.2% | 99.3% |
+| 1 | 🇪🇸 **Spain** | **40.9%** | 53.7% | 99.9% |
+| 2 | 🇦🇷 Argentina | 20.2% | 35.2% | 99.7% |
+| 3 | 🇫🇷 France | 9.7% | 19.2% | 99.3% |
+| 4 | 🇨🇴 Colombia | 5.5% | 12.8% | 95.8% |
+| 5 | 🇵🇹 Portugal | 3.6% | 9.5% | 96.1% |
+| 6 | 🇧🇷 Brazil | 3.4% | 9.7% | 97.3% |
 
-> ### Predicted champion: 🇦🇷 **Argentina** — ~24% (statistical favourite)
+> ### Predicted champion: 🇪🇸 **Spain** — ~41%
 >
-> Argentina, France and Spain are within ~5 points and account for ~68% of
-> simulated titles — a genuine three-way race. The authored bracket resolves it
-> to Argentina lifting the trophy over Spain in the final.
+> Spain carries the highest real Elo in the field and, in the recorded data, has
+> already won its semifinal 2-0 over France. The model makes them a clear
+> favourite over Argentina for the unplayed final.
 
-## 9. Limitations
+## 8. Limitations
 
-- Trained on a **synthetic** history sampled from real strengths, not live feeds.
-- Eight qualifiers use **best-estimate** FIFA points.
-- Availability and sentiment are **curated snapshots**, not live feeds.
-- The knockout bracket is an **authored projection**; real scorelines are not
-  available to verify.
-- No modelling of red cards, in-game tactics, or shootout variance beyond a
-  ranking-weighted coin flip.
+- Injuries/availability and fan sentiment are **current-context adjustments**,
+  not historical features.
+- Eight lower-ranked qualifiers use **best-estimate** FIFA points.
+- A dominant Elo leader compounds over a single-elimination bracket, so the
+  favourite's title odds sit high; single matches carry more variance than any
+  model captures.
+- No modelling of red cards, in-game tactics or shootout skill directly.
 - **All outputs are probability-based estimates, not guarantees.**
 
-## 10. Reproducibility
+## 9. Reproducibility
 
 ```bash
 cd backend
-python -m wc2026.ml.eda           # EDA
-python -m wc2026.ml.train         # retrain + re-evaluate (writes artifacts/)
-python -m wc2026.engine.bracket   # print the authored bracket
-python -m wc2026.engine.simulate  # Monte Carlo sanity check
+git clone https://github.com/martj42/international_results.git data_raw   # raw data
+python -m wc2026.ml.eda            # EDA on real matches
+python -m wc2026.ml.train          # Elo replay + train (writes artifacts/)
+python -m wc2026.ml.elo_features   # current Elo leaders
 ```
 
-All randomness is seeded, so every run reproduces the same dataset, metrics,
-bracket and canonical predictions.
+Deterministic given the dataset snapshot; the committed artifacts let the API run
+without the raw data.

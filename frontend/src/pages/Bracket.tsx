@@ -18,8 +18,16 @@ export default function Bracket() {
     <div>
       <SectionTitle
         title="Tournament Bracket"
-        subtitle="The full knockout path to the 2026 title. Click any match for details."
+        subtitle="Real recorded results through the semifinals — the final & third-place play-off are the model's predictions. Click any match for details."
       />
+
+      {b.results_source && (
+        <div className="mb-6 flex flex-wrap items-center gap-3 rounded-xl border border-pitch-400/20 bg-pitch-500/5 p-3 text-xs text-slate-300">
+          <span className="chip">✅ Real data</span>
+          <span>{b.results_source}</span>
+          {b.as_of && <span className="text-slate-500">· as of {b.as_of}</span>}
+        </div>
+      )}
 
       {/* Schedule strip */}
       <div className="card mb-6 flex flex-wrap items-center gap-2 p-4 text-xs">
@@ -41,7 +49,7 @@ export default function Bracket() {
 
       {/* Podium */}
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
-        <PodiumCard place="Champions" emoji="🥇" flag={b.champion.flag} name={b.champion.name} accent />
+        <PodiumCard place={b.champion.predicted ? "Predicted champions" : "Champions"} emoji="🥇" flag={b.champion.flag} name={b.champion.name} accent />
         <PodiumCard place="Runners-up" emoji="🥈" flag={b.runner_up.flag} name={b.runner_up.name} />
         <PodiumCard place="Third place" emoji="🥉" flag={b.third.flag} name={b.third.name} />
       </div>
@@ -80,13 +88,11 @@ export default function Bracket() {
         </div>
       </div>
 
-      {b.is_projection && (
-        <p className="mt-4 text-center text-xs text-slate-500">
-          Bracket is a deterministic projection (favourite advances; one scripted semifinal upset to reach the
-          specified final). Scorelines are model-projected, not verified match results — edit the data file to drop in
-          real scores.
-        </p>
-      )}
+      <p className="mt-4 text-center text-xs text-slate-500">
+        Group stage through the semifinals show <b className="text-slate-400">real recorded scores</b> (penalty
+        shootouts resolved from the dataset). The final and third-place play-off are unplayed as of {b.as_of ?? "today"} and
+        show the model's prediction.
+      </p>
 
       <Disclaimer text={data.disclaimer} />
     </div>
@@ -119,11 +125,15 @@ function PodiumCard({
 
 function FeaturedMatch({ title, subtitle, m }: { title: string; subtitle: string; m: KnockoutMatch }) {
   const winA = m.winner_id === m.team_a.id;
+  const wp = m.win_probabilities;
   return (
     <div className="card p-5">
       <div className="mb-3 flex items-center justify-between">
         <h3 className="font-semibold text-white">{title}</h3>
-        <span className="text-xs text-slate-400">{subtitle}</span>
+        <div className="flex items-center gap-2 text-xs text-slate-400">
+          {m.predicted && <span className="chip !py-0 text-[10px] text-amber-300">PREDICTED</span>}
+          <span>{subtitle}</span>
+        </div>
       </div>
       <div className="flex items-center justify-between">
         <Side flag={m.team_a.flag} name={m.team_a.name} win={winA} />
@@ -132,9 +142,21 @@ function FeaturedMatch({ title, subtitle, m }: { title: string; subtitle: string
             {m.score_a} – {m.score_b}
           </div>
           {m.penalties && <div className="text-xs text-gold">on penalties</div>}
+          {m.predicted && <div className="text-[10px] uppercase tracking-wide text-slate-500">projected score</div>}
         </div>
         <Side flag={m.team_b.flag} name={m.team_b.name} win={!winA} right />
       </div>
+      {wp && (
+        <div className="mt-3 flex overflow-hidden rounded-full text-[10px] font-semibold">
+          <div className="flex items-center justify-center bg-pitch-500 py-1 text-white" style={{ width: `${wp.team_a * 100}%` }}>
+            {(wp.team_a * 100).toFixed(0)}%
+          </div>
+          <div className="flex items-center justify-center bg-slate-600 py-1 text-white" style={{ width: `${wp.draw * 100}%` }} />
+          <div className="flex items-center justify-center bg-blue-500 py-1 text-white" style={{ width: `${wp.team_b * 100}%` }}>
+            {(wp.team_b * 100).toFixed(0)}%
+          </div>
+        </div>
+      )}
     </div>
   );
 }

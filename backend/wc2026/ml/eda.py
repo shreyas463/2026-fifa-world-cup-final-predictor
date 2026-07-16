@@ -1,8 +1,7 @@
-"""Exploratory data analysis over the generated match dataset.
+"""Exploratory data analysis over the REAL international-match history.
 
-Prints the class balance, the correlation of each engineered feature with the
-match result, and win/draw/loss rates bucketed by Elo gap — the analysis that
-justifies the feature set used by the models.
+Prints outcome balance, home advantage, feature-vs-outcome correlations and
+win-rate by Elo gap — the evidence that justifies the feature set.
 
 Run:  python -m wc2026.ml.eda
 """
@@ -11,50 +10,47 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from .dataset import build_training_data
+from .elo_features import FEATURE_NAMES, replay
+from .history import load_results
 
 
 def run_eda() -> pd.DataFrame:
-    X, y, ga, gb, names = build_training_data()
-    df = pd.DataFrame(X, columns=names)
-    df["result"] = y  # 0 A win, 1 draw, 2 B win
-    df["goals_a"] = ga
-    df["goals_b"] = gb
+    full = load_results(played_only=True)
+    X, y, dates, _ = replay()
+    df = pd.DataFrame(X, columns=FEATURE_NAMES)
+    df["result"] = y  # 0 home win, 1 draw, 2 away win
 
-    print("=" * 64)
-    print("EXPLORATORY DATA ANALYSIS — synthetic international match history")
-    print("=" * 64)
-    print(f"\nMatches: {len(df):,}")
+    print("=" * 66)
+    print("EXPLORATORY DATA ANALYSIS — real international results (martj42)")
+    print("=" * 66)
+    print(f"\nTotal internationals on record: {len(full):,} "
+          f"({full.date.min().date()} .. {full.date.max().date()})")
+    print(f"Training rows (1990+): {len(df):,}")
 
-    counts = df["result"].value_counts().sort_index()
-    labels = {0: "Team A win", 1: "Draw", 2: "Team B win"}
+    labels = {0: "Home win", 1: "Draw", 2: "Away win"}
     print("\nOutcome balance:")
-    for k, v in counts.items():
-        print(f"  {labels[k]:12s} {v:5d}  ({v / len(df) * 100:4.1f}%)")
+    for k, v in df["result"].value_counts().sort_index().items():
+        print(f"  {labels[k]:10s} {v:6d}  ({v / len(df) * 100:4.1f}%)")
 
-    print(f"\nAverage goals per team per match: {(ga.mean() + gb.mean()) / 2:.2f}")
-    print(f"Home/host win rate boost (venue set): "
-          f"{(df[df.home_advantage == 1].result == 0).mean() * 100:4.1f}% vs "
-          f"{(df[df.home_advantage == 0].result == 0).mean() * 100:4.1f}% neutral")
+    home_games = df[df.home_advantage == 1]
+    neutral = df[df.home_advantage == 0]
+    print(f"\nHome win rate (home venue): {(home_games.result == 0).mean() * 100:4.1f}%")
+    print(f"Home win rate (neutral):    {(neutral.result == 0).mean() * 100:4.1f}%")
 
-    # Correlation of each feature with an A-favouring outcome score (+1 win .. -1 loss)
     outcome_score = np.where(y == 0, 1.0, np.where(y == 1, 0.0, -1.0))
-    print("\nFeature correlation with match outcome (A perspective):")
-    corr = {c: np.corrcoef(df[c], outcome_score)[0, 1] for c in names}
+    print("\nFeature correlation with outcome (home perspective):")
+    corr = {c: np.corrcoef(df[c], outcome_score)[0, 1] for c in FEATURE_NAMES}
     for c, v in sorted(corr.items(), key=lambda kv: -abs(kv[1])):
-        bar = "█" * int(abs(v) * 40)
-        print(f"  {c:20s} {v:+.3f} {bar}")
+        print(f"  {c:16s} {v:+.3f} {'█' * int(abs(v) * 40)}")
 
-    # Win rate by Elo-gap bucket
-    print("\nTeam A win rate by Elo advantage:")
-    buckets = pd.cut(df["elo_diff"], [-1000, -150, -50, 50, 150, 1000],
-                     labels=["<-150", "-150..-50", "-50..50", "50..150", ">150"])
-    table = df.groupby(buckets, observed=True)["result"].apply(lambda s: (s == 0).mean())
-    for band, rate in table.items():
-        print(f"  Elo diff {str(band):12s} -> {rate * 100:4.1f}% wins")
+    print("\nHome win rate by Elo advantage:")
+    buckets = pd.cut(df["elo_diff"], [-2000, -200, -75, 75, 200, 2000],
+                     labels=["<-200", "-200..-75", "-75..75", "75..200", ">200"])
+    for band, rate in df.groupby(buckets, observed=True)["result"].apply(lambda s: (s == 0).mean()).items():
+        print(f"  Elo diff {str(band):11s} -> {rate * 100:4.1f}% home wins")
 
-    print("\nInsight: Elo difference is the dominant signal, amplified by recent")
-    print("form and host advantage — which is exactly what the models learn.")
+    print("\nInsight: real Elo difference is the dominant signal, reinforced by")
+    print("recent form, goal rates and a clear home-venue advantage.")
     return df
 
 
