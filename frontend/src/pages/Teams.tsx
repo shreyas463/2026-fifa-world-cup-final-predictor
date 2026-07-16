@@ -84,7 +84,7 @@ export default function Teams() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {teams.map((t) => (
-              <Link key={t.id} to={`/teams/${t.id}`} className="card group p-4 transition hover:ring-1 hover:ring-pitch-400/40">
+              <Link key={t.id} to={`/teams/${t.id}`} className="card card-hover p-4">
                 <div className="flex items-center gap-3">
                   <div className="text-4xl">
                     <Flag flag={t.flag} />

@@ -8,11 +8,11 @@ export default function Home() {
 
   return (
     <div>
-      <section className="relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-night-900 to-night-950 px-6 py-14 text-center sm:py-20">
+      <section className="relative overflow-hidden rounded-3xl border border-white/[0.07] bg-gradient-to-br from-night-900 to-night-950 px-6 py-12 text-center sm:py-16">
         <div className="pointer-events-none absolute inset-0 opacity-40 [background:radial-gradient(circle_at_50%_-20%,rgba(18,161,80,0.35),transparent_60%)]" />
         <div className="relative">
           <span className="chip mx-auto mb-4">⚽ 48 teams · 104 matches · June–July 2026</span>
-          <h1 className="mx-auto max-w-3xl text-4xl font-extrabold leading-tight text-white sm:text-5xl">
+          <h1 className="mx-auto max-w-3xl text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl">
             Who will win the <span className="text-pitch-400">2026 FIFA World Cup?</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-slate-300">

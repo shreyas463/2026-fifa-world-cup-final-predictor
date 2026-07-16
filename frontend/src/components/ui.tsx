@@ -13,14 +13,17 @@ export function Loader({ label = "Crunching the numbers…" }: { label?: string 
 }
 
 export function ErrorMessage({ message, onRetry }: { message: string; onRetry?: () => void }) {
+  const isStatic = import.meta.env.VITE_STATIC === "true";
   return (
     <div className="card mx-auto my-10 max-w-lg p-6 text-center">
       <div className="mb-2 text-3xl">⚠️</div>
       <h3 className="mb-1 text-lg font-semibold text-red-300">Couldn't load the data</h3>
       <p className="mb-4 text-sm text-slate-400">{message}</p>
-      <p className="mb-4 text-xs text-slate-500">
-        Make sure the prediction API is running at <code>http://localhost:8000</code>.
-      </p>
+      {!isStatic && (
+        <p className="mb-4 text-xs text-slate-500">
+          Make sure the prediction API is running at <code>http://localhost:8000</code>.
+        </p>
+      )}
       {onRetry && (
         <button className="btn-primary" onClick={onRetry}>
           Try again
@@ -79,10 +82,12 @@ export function StatCard({
   accent?: boolean;
 }) {
   return (
-    <div className={`card p-4 ${accent ? "ring-1 ring-pitch-400/40" : ""}`}>
-      <div className="text-xs uppercase tracking-wide text-slate-400">{label}</div>
-      <div className={`mt-1 text-2xl font-bold ${accent ? "text-pitch-400" : "text-slate-100"}`}>{value}</div>
-      {sub && <div className="mt-0.5 text-xs text-slate-500">{sub}</div>}
+    <div className={`card p-4 ${accent ? "ring-1 ring-pitch-400/40 bg-pitch-500/[0.04]" : ""}`}>
+      <div className="eyebrow">{label}</div>
+      <div className={`mt-1.5 text-2xl font-bold leading-tight ${accent ? "text-pitch-400" : "text-slate-100"}`}>
+        {value}
+      </div>
+      {sub && <div className="mt-1 text-xs text-slate-500">{sub}</div>}
     </div>
   );
 }
@@ -90,8 +95,11 @@ export function StatCard({
 export function SectionTitle({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="mb-6">
-      <h1 className="text-2xl font-bold text-white sm:text-3xl">{title}</h1>
-      {subtitle && <p className="mt-1 text-sm text-slate-400">{subtitle}</p>}
+      <div className="flex items-center gap-2.5">
+        <span className="h-6 w-1 rounded-full bg-pitch-500" />
+        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-[1.75rem]">{title}</h1>
+      </div>
+      {subtitle && <p className="mt-1.5 pl-3.5 text-sm text-slate-400">{subtitle}</p>}
     </div>
   );
 }

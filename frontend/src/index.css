@@ -7,37 +7,67 @@
   color-scheme: dark;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-night-950 text-slate-100 font-display antialiased;
-  background-image: radial-gradient(circle at 15% 0%, rgba(18, 161, 80, 0.14), transparent 45%),
-    radial-gradient(circle at 90% 10%, rgba(244, 197, 66, 0.08), transparent 40%);
+  background-image: radial-gradient(circle at 12% -5%, rgba(18, 161, 80, 0.12), transparent 42%),
+    radial-gradient(circle at 92% 4%, rgba(244, 197, 66, 0.07), transparent 40%);
   background-attachment: fixed;
 }
 
 @layer components {
+  /* Surfaces */
   .card {
-    @apply rounded-2xl border border-white/5 bg-night-900/70 shadow-lg shadow-black/30 backdrop-blur;
+    @apply rounded-2xl border border-white/[0.07] bg-night-900/60 shadow-xl shadow-black/20 backdrop-blur-sm;
   }
+  .card-hover {
+    @apply transition duration-200 hover:border-white/15 hover:bg-night-900/85 hover:shadow-2xl hover:shadow-black/30;
+  }
+
+  /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-semibold transition
-      focus:outline-none focus:ring-2 focus:ring-pitch-400/60 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition duration-200
+      focus:outline-none focus-visible:ring-2 focus-visible:ring-pitch-400/60 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   .btn-primary {
-    @apply btn bg-pitch-500 text-white hover:bg-pitch-400;
+    @apply btn bg-pitch-500 text-white shadow-lg shadow-pitch-900/40 hover:bg-pitch-400 active:scale-[0.98];
   }
   .btn-ghost {
-    @apply btn border border-white/10 bg-white/5 text-slate-100 hover:bg-white/10;
+    @apply btn border border-white/10 bg-white/[0.04] text-slate-100 hover:border-white/20 hover:bg-white/[0.08];
   }
+
+  /* Forms */
   .input {
-    @apply w-full rounded-xl border border-white/10 bg-night-850 px-3.5 py-2.5 text-slate-100
-      placeholder-slate-500 focus:border-pitch-400/60 focus:outline-none focus:ring-2 focus:ring-pitch-400/30;
+    @apply w-full rounded-xl border border-white/10 bg-night-850/80 px-3.5 py-2.5 text-sm text-slate-100
+      placeholder-slate-500 transition focus:border-pitch-400/60 focus:outline-none focus:ring-2 focus:ring-pitch-400/25;
   }
+
+  /* Bits */
   .chip {
-    @apply inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-slate-300;
+    @apply inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-xs font-medium text-slate-300;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400;
+  }
+  .divider {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
   }
 }
 
-/* Thin scrollbars for a tidier UI */
-::-webkit-scrollbar { width: 10px; height: 10px; }
+/* Thin, tidy scrollbars */
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { @apply rounded-full bg-white/10; }
 ::-webkit-scrollbar-thumb:hover { @apply bg-white/20; }
+
+/* Gentle enter animation for page content */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+main > * {
+  animation: rise 0.35s ease both;
+}
