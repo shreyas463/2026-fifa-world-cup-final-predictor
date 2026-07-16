@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar, { GithubIcon, REPO_URL } from "./components/Navbar";
 import Home from "./pages/Home";
 import Teams from "./pages/Teams";
 import TeamDetail from "./pages/TeamDetail";
@@ -30,8 +30,16 @@ export default function App() {
           <Route path="*" element={<div className="py-20 text-center text-slate-400">Page not found.</div>} />
         </Routes>
       </main>
-      <footer className="border-t border-white/5 py-6 text-center text-xs text-slate-500">
-        2026 FIFA World Cup Winner Predictor · Statistical estimates for educational use · Not affiliated with FIFA
+      <footer className="mt-8 border-t border-white/5 py-8 text-center text-xs text-slate-500">
+        <a
+          href={REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-3 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3.5 py-2 font-medium text-slate-300 transition hover:border-white/20 hover:text-white"
+        >
+          <GithubIcon /> View source on GitHub
+        </a>
+        <p>2026 FIFA World Cup Winner Predictor · Statistical estimates for educational use · Not affiliated with FIFA</p>
       </footer>
     </div>
   );
