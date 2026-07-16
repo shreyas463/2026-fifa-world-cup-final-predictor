@@ -1,0 +1,180 @@
+{
+  "best_model": "Logistic Regression",
+  "metrics": {
+    "accuracy": 0.494,
+    "log_loss": 1.0259,
+    "precision": 0.3296,
+    "recall": 0.4352,
+    "f1": 0.3751,
+    "roc_auc": 0.6259,
+    "brier": 0.6135
+  },
+  "model_comparison": {
+    "Logistic Regression": {
+      "accuracy": 0.494,
+      "log_loss": 1.0259,
+      "precision": 0.3296,
+      "recall": 0.4352,
+      "f1": 0.3751,
+      "roc_auc": 0.6259,
+      "brier": 0.6135
+    },
+    "Random Forest": {
+      "accuracy": 0.4845,
+      "log_loss": 1.0408,
+      "precision": 0.6563,
+      "recall": 0.4268,
+      "f1": 0.3701,
+      "roc_auc": 0.5946,
+      "brier": 0.6258
+    },
+    "Gradient Boosting": {
+      "accuracy": 0.469,
+      "log_loss": 1.0682,
+      "precision": 0.4041,
+      "recall": 0.4173,
+      "f1": 0.3786,
+      "roc_auc": 0.5789,
+      "brier": 0.6435
+    },
+    "Poisson (baseline)": {
+      "accuracy": 0.469,
+      "log_loss": 1.0717,
+      "precision": 0.313,
+      "recall": 0.4127,
+      "f1": 0.3558,
+      "roc_auc": 0.5995,
+      "brier": 0.6438
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "A win",
+      "Draw",
+      "B win"
+    ],
+    "matrix": [
+      [
+        209,
+        0,
+        117
+      ],
+      [
+        120,
+        0,
+        84
+      ],
+      [
+        104,
+        0,
+        206
+      ]
+    ]
+  },
+  "feature_importance": [
+    {
+      "feature": "elo_diff",
+      "importance": 0.4577
+    },
+    {
+      "feature": "home_advantage",
+      "importance": 0.3093
+    },
+    {
+      "feature": "form_diff",
+      "importance": 0.1341
+    },
+    {
+      "feature": "attack_b",
+      "importance": 0.0293
+    },
+    {
+      "feature": "defense_b",
+      "importance": 0.0259
+    },
+    {
+      "feature": "attack_vs_defense",
+      "importance": 0.0258
+    },
+    {
+      "feature": "attack_a",
+      "importance": 0.0095
+    },
+    {
+      "feature": "defense_a",
+      "importance": 0.0083
+    }
+  ],
+  "calibration_curve": [
+    {
+      "predicted": 0.08,
+      "observed": 0.154,
+      "count": 13
+    },
+    {
+      "predicted": 0.159,
+      "observed": 0.224,
+      "count": 85
+    },
+    {
+      "predicted": 0.25,
+      "observed": 0.263,
+      "count": 179
+    },
+    {
+      "predicted": 0.35,
+      "observed": 0.385,
+      "count": 182
+    },
+    {
+      "predicted": 0.449,
+      "observed": 0.374,
+      "count": 187
+    },
+    {
+      "predicted": 0.544,
+      "observed": 0.595,
+      "count": 116
+    },
+    {
+      "predicted": 0.642,
+      "observed": 0.643,
+      "count": 56
+    },
+    {
+      "predicted": 0.739,
+      "observed": 0.619,
+      "count": 21
+    }
+  ],
+  "training": {
+    "n_matches": 3360,
+    "n_train": 2520,
+    "n_test": 840,
+    "features": [
+      "elo_diff",
+      "form_diff",
+      "attack_a",
+      "defense_a",
+      "attack_b",
+      "defense_b",
+      "attack_vs_defense",
+      "home_advantage"
+    ],
+    "class_labels": [
+      "A win",
+      "Draw",
+      "B win"
+    ]
+  },
+  "data_sources": [
+    "Curated 2026 field: Elo ratings, recent form, squad valuations, World Cup pedigree",
+    "Reproducible synthetic match history generated from latent team strengths"
+  ],
+  "limitations": [
+    "Trained on a synthetic, generatively-sampled history \u2014 not live match feeds.",
+    "The 2026 field is a projection; qualification and squads will change.",
+    "Cannot model injuries, red cards, tactics, penalty-shootout variance or morale.",
+    "Probabilities are calibrated estimates, not guarantees."
+  ]
+}

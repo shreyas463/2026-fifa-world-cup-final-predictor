@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-night-950 text-slate-100 font-display antialiased;
+  background-image: radial-gradient(circle at 15% 0%, rgba(18, 161, 80, 0.14), transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(244, 197, 66, 0.08), transparent 40%);
+  background-attachment: fixed;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-white/5 bg-night-900/70 shadow-lg shadow-black/30 backdrop-blur;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 font-semibold transition
+      focus:outline-none focus:ring-2 focus:ring-pitch-400/60 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-pitch-500 text-white hover:bg-pitch-400;
+  }
+  .btn-ghost {
+    @apply btn border border-white/10 bg-white/5 text-slate-100 hover:bg-white/10;
+  }
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-night-850 px-3.5 py-2.5 text-slate-100
+      placeholder-slate-500 focus:border-pitch-400/60 focus:outline-none focus:ring-2 focus:ring-pitch-400/30;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-slate-300;
+  }
+}
+
+/* Thin scrollbars for a tidier UI */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { @apply rounded-full bg-white/10; }
+::-webkit-scrollbar-thumb:hover { @apply bg-white/20; }

@@ -1,0 +1,20 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+backend/artifacts/*.joblib
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+*.log
+*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+.claude/
