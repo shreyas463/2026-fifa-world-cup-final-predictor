@@ -9,12 +9,15 @@ trains an outcome model on real history, folds in **fan sentiment** and injuries
 and reports each nation's odds — with a bracket built from the **actual recorded
 2026 World Cup results** through the semifinals.
 
+### ▶️ [**Live demo →** shreyas463.github.io/2026-fifa-world-cup-final-predictor](https://shreyas463.github.io/2026-fifa-world-cup-final-predictor/)
+
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/deployed-GitHub%20Pages-222?logo=github)
 
 </div>
 
@@ -171,6 +174,20 @@ cd frontend
 npm install
 npm run dev                    # http://localhost:5173  (proxies /api → :8000)
 ```
+
+### 🚀 Deploy (static, no server)
+
+The whole app can run as a **static site** — the backend pre-computes every
+response to JSON and the frontend serves it (match predictor & simulator
+included). It's deployed to GitHub Pages:
+
+```bash
+./deploy.sh    # exports data → builds with VITE_STATIC → pushes to gh-pages
+```
+
+Under the hood: `python -m scripts.export_static` writes `frontend/public/data/*.json`,
+then `VITE_STATIC=true npm run build` produces a self-contained site. Any static
+host works; point `VITE_API_URL` at a running backend instead to use the live API.
 
 ---
 
