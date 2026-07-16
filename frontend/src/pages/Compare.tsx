@@ -86,12 +86,14 @@ function ComparisonView({ data }: { data: Awaited<ReturnType<typeof api.comparis
   }));
 
   const rows: { label: string; av: number | string; bv: number | string; aRaw: number; bRaw: number; higher?: "lower" }[] = [
-    { label: "FIFA / Elo rank", av: `#${a.fifa_rank}`, bv: `#${b.fifa_rank}`, aRaw: -a.fifa_rank, bRaw: -b.fifa_rank },
-    { label: "Elo rating", av: a.elo, bv: b.elo, aRaw: a.elo, bRaw: b.elo },
+    { label: "FIFA rank (field)", av: `#${a.fifa_rank}`, bv: `#${b.fifa_rank}`, aRaw: -a.fifa_rank, bRaw: -b.fifa_rank },
+    { label: "FIFA points", av: Math.round(a.fifa_points), bv: Math.round(b.fifa_points), aRaw: a.fifa_points, bRaw: b.fifa_points },
     { label: "Recent form", av: a.form, bv: b.form, aRaw: a.form, bRaw: b.form },
     { label: "Avg goals scored", av: a.attack, bv: b.attack, aRaw: a.attack, bRaw: b.attack },
     { label: "Avg goals conceded", av: a.defense, bv: b.defense, aRaw: -a.defense, bRaw: -b.defense },
     { label: "Squad value (€M)", av: a.squad_value_m, bv: b.squad_value_m, aRaw: a.squad_value_m, bRaw: b.squad_value_m },
+    { label: "Squad availability", av: `${a.availability}%`, bv: `${b.availability}%`, aRaw: a.availability, bRaw: b.availability },
+    { label: "Fan sentiment", av: Math.round(a.sentiment), bv: Math.round(b.sentiment), aRaw: a.sentiment, bRaw: b.sentiment },
     { label: "WC appearances", av: a.wc_appearances, bv: b.wc_appearances, aRaw: a.wc_appearances, bRaw: b.wc_appearances },
     { label: "WC titles", av: a.wc_titles, bv: b.wc_titles, aRaw: a.wc_titles, bRaw: b.wc_titles },
     {

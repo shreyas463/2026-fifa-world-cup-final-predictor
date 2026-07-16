@@ -9,6 +9,7 @@ import Bracket from "./pages/Bracket";
 import Compare from "./pages/Compare";
 import Leaderboard from "./pages/Leaderboard";
 import ModelInsights from "./pages/ModelInsights";
+import Sentiment from "./pages/Sentiment";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/bracket" element={<Bracket />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/sentiment" element={<Sentiment />} />
           <Route path="/model" element={<ModelInsights />} />
           <Route path="*" element={<div className="py-20 text-center text-slate-400">Page not found.</div>} />
         </Routes>

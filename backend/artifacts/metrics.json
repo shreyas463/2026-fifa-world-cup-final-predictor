@@ -1,51 +1,63 @@
 {
   "best_model": "Logistic Regression",
   "metrics": {
-    "accuracy": 0.494,
-    "log_loss": 1.0259,
-    "precision": 0.3296,
-    "recall": 0.4352,
-    "f1": 0.3751,
-    "roc_auc": 0.6259,
-    "brier": 0.6135
+    "accuracy": 0.5638,
+    "log_loss": 0.9447,
+    "precision": 0.3762,
+    "recall": 0.4842,
+    "f1": 0.4232,
+    "roc_auc": 0.6796,
+    "brier": 0.558
   },
   "model_comparison": {
     "Logistic Regression": {
-      "accuracy": 0.494,
-      "log_loss": 1.0259,
-      "precision": 0.3296,
-      "recall": 0.4352,
-      "f1": 0.3751,
-      "roc_auc": 0.6259,
-      "brier": 0.6135
+      "accuracy": 0.5638,
+      "log_loss": 0.9447,
+      "precision": 0.3762,
+      "recall": 0.4842,
+      "f1": 0.4232,
+      "roc_auc": 0.6796,
+      "brier": 0.558
     },
     "Random Forest": {
-      "accuracy": 0.4845,
-      "log_loss": 1.0408,
-      "precision": 0.6563,
-      "recall": 0.4268,
-      "f1": 0.3701,
-      "roc_auc": 0.5946,
-      "brier": 0.6258
+      "accuracy": 0.556,
+      "log_loss": 0.9538,
+      "precision": 0.3707,
+      "recall": 0.4777,
+      "f1": 0.4174,
+      "roc_auc": 0.678,
+      "brier": 0.5643
     },
     "Gradient Boosting": {
-      "accuracy": 0.469,
-      "log_loss": 1.0682,
-      "precision": 0.4041,
-      "recall": 0.4173,
-      "f1": 0.3786,
-      "roc_auc": 0.5789,
-      "brier": 0.6435
+      "accuracy": 0.569,
+      "log_loss": 0.9599,
+      "precision": 0.4642,
+      "recall": 0.4937,
+      "f1": 0.4497,
+      "roc_auc": 0.6758,
+      "brier": 0.5687
     },
     "Poisson (baseline)": {
-      "accuracy": 0.469,
-      "log_loss": 1.0717,
-      "precision": 0.313,
-      "recall": 0.4127,
-      "f1": 0.3558,
-      "roc_auc": 0.5995,
-      "brier": 0.6438
+      "accuracy": 0.5664,
+      "log_loss": 0.9681,
+      "precision": 0.5443,
+      "recall": 0.4872,
+      "f1": 0.4286,
+      "roc_auc": 0.687,
+      "brier": 0.5678
     }
+  },
+  "validation_log_loss": {
+    "Logistic Regression": 0.975,
+    "Random Forest": 0.9874,
+    "Gradient Boosting": 1.0062
+  },
+  "overfitting_check": {
+    "train_accuracy": 0.5629,
+    "test_accuracy": 0.5638,
+    "accuracy_gap": -0.0009,
+    "train_log_loss": 0.9488,
+    "test_log_loss": 0.9447
   },
   "confusion_matrix": {
     "labels": [
@@ -55,110 +67,141 @@
     ],
     "matrix": [
       [
-        209,
+        225,
         0,
-        117
+        77
       ],
       [
-        120,
+        94,
         0,
-        84
+        78
       ],
       [
-        104,
+        86,
         0,
-        206
+        208
       ]
     ]
   },
   "feature_importance": [
     {
-      "feature": "elo_diff",
-      "importance": 0.4577
+      "feature": "rating_diff",
+      "importance": 0.2602
     },
     {
       "feature": "home_advantage",
-      "importance": 0.3093
+      "importance": 0.1901
     },
     {
-      "feature": "form_diff",
-      "importance": 0.1341
+      "feature": "sentiment_diff",
+      "importance": 0.1315
     },
     {
-      "feature": "attack_b",
-      "importance": 0.0293
+      "feature": "squad_diff",
+      "importance": 0.0701
     },
     {
-      "feature": "defense_b",
-      "importance": 0.0259
+      "feature": "experience_diff",
+      "importance": 0.0624
     },
     {
-      "feature": "attack_vs_defense",
-      "importance": 0.0258
+      "feature": "h2h_diff",
+      "importance": 0.0579
     },
     {
       "feature": "attack_a",
-      "importance": 0.0095
+      "importance": 0.0481
+    },
+    {
+      "feature": "form_diff",
+      "importance": 0.0413
+    },
+    {
+      "feature": "availability_diff",
+      "importance": 0.0372
+    },
+    {
+      "feature": "attack_b",
+      "importance": 0.0331
     },
     {
       "feature": "defense_a",
-      "importance": 0.0083
+      "importance": 0.0262
+    },
+    {
+      "feature": "defense_b",
+      "importance": 0.0228
+    },
+    {
+      "feature": "attack_vs_defense",
+      "importance": 0.0191
     }
   ],
   "calibration_curve": [
     {
-      "predicted": 0.08,
-      "observed": 0.154,
-      "count": 13
+      "predicted": 0.072,
+      "observed": 0.091,
+      "count": 44
     },
     {
-      "predicted": 0.159,
-      "observed": 0.224,
-      "count": 85
+      "predicted": 0.153,
+      "observed": 0.172,
+      "count": 122
     },
     {
       "predicted": 0.25,
-      "observed": 0.263,
-      "count": 179
-    },
-    {
-      "predicted": 0.35,
-      "observed": 0.385,
-      "count": 182
-    },
-    {
-      "predicted": 0.449,
-      "observed": 0.374,
-      "count": 187
-    },
-    {
-      "predicted": 0.544,
-      "observed": 0.595,
+      "observed": 0.224,
       "count": 116
     },
     {
-      "predicted": 0.642,
-      "observed": 0.643,
-      "count": 56
+      "predicted": 0.352,
+      "observed": 0.376,
+      "count": 117
     },
     {
-      "predicted": 0.739,
-      "observed": 0.619,
-      "count": 21
+      "predicted": 0.446,
+      "observed": 0.393,
+      "count": 122
+    },
+    {
+      "predicted": 0.551,
+      "observed": 0.515,
+      "count": 99
+    },
+    {
+      "predicted": 0.644,
+      "observed": 0.698,
+      "count": 86
+    },
+    {
+      "predicted": 0.746,
+      "observed": 0.756,
+      "count": 45
+    },
+    {
+      "predicted": 0.837,
+      "observed": 0.875,
+      "count": 16
     }
   ],
   "training": {
-    "n_matches": 3360,
-    "n_train": 2520,
-    "n_test": 840,
+    "n_matches": 3840,
+    "n_train": 2304,
+    "n_validation": 768,
+    "n_test": 768,
     "features": [
-      "elo_diff",
+      "rating_diff",
       "form_diff",
       "attack_a",
       "defense_a",
       "attack_b",
       "defense_b",
       "attack_vs_defense",
+      "h2h_diff",
+      "experience_diff",
+      "squad_diff",
+      "availability_diff",
+      "sentiment_diff",
       "home_advantage"
     ],
     "class_labels": [
@@ -168,13 +211,17 @@
     ]
   },
   "data_sources": [
-    "Curated 2026 field: Elo ratings, recent form, squad valuations, World Cup pedigree",
-    "Reproducible synthetic match history generated from latent team strengths"
+    "Real 2026 Final Draw (5 Dec 2025) \u2014 FIFA.com / Wikipedia",
+    "Real FIFA/Coca-Cola Men's World Ranking points (July 2026 snapshot)",
+    "World Cup titles & appearances \u2014 historical record",
+    "Fan sentiment \u2014 social-media positivity/buzz (curated, pluggable to X API)",
+    "Reproducible synthetic match history sampled from latent team strengths"
   ],
   "limitations": [
     "Trained on a synthetic, generatively-sampled history \u2014 not live match feeds.",
-    "The 2026 field is a projection; qualification and squads will change.",
-    "Cannot model injuries, red cards, tactics, penalty-shootout variance or morale.",
+    "Eight lower-ranked qualifiers use best-estimate FIFA points (outside the public top-60).",
+    "Availability (injuries) and fan sentiment are curated snapshots, not live feeds.",
+    "Cannot model red cards, in-game tactics or penalty-shootout variance directly.",
     "Probabilities are calibrated estimates, not guarantees."
   ]
 }

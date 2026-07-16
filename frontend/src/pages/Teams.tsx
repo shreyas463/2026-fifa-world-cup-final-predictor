@@ -4,7 +4,7 @@ import { api, pct, Team } from "../api";
 import { useAsync } from "../hooks";
 import { Disclaimer, ErrorMessage, Flag, Loader, ProbabilityBar, SectionTitle } from "../components/ui";
 
-type SortKey = "winner" | "group_advance" | "final" | "elo" | "form";
+type SortKey = "winner" | "group_advance" | "final" | "rating" | "form";
 
 export default function Teams() {
   const { data, loading, error, reload } = useAsync(() => api.teams(), []);
@@ -30,7 +30,7 @@ export default function Teams() {
       return true;
     });
     const key = (t: Team) =>
-      sort === "elo" ? t.elo : sort === "form" ? t.form : t.probabilities[sort];
+      sort === "rating" ? t.fifa_points : sort === "form" ? t.form : t.probabilities[sort];
     return [...list].sort((a, b) => key(b) - key(a));
   }, [data, q, group, conf, sort]);
 
@@ -69,7 +69,7 @@ export default function Teams() {
           <option value="winner">Sort: Win World Cup</option>
           <option value="final">Sort: Reach final</option>
           <option value="group_advance">Sort: Advance from group</option>
-          <option value="elo">Sort: Elo rating</option>
+          <option value="rating">Sort: FIFA points</option>
           <option value="form">Sort: Recent form</option>
         </select>
       </div>
@@ -104,7 +104,8 @@ export default function Teams() {
                   <ProbabilityBar value={t.probabilities.group_advance} label="Advance from group" color="#12a150" />
                 </div>
                 <div className="mt-3 flex justify-between text-xs text-slate-500">
-                  <span>Elo {t.elo}</span>
+                  <span>FIFA {Math.round(t.fifa_points)}</span>
+                  <span>💬 {Math.round(t.sentiment)}</span>
                   <span>Form {t.form}</span>
                 </div>
               </Link>

@@ -6,19 +6,19 @@ from __future__ import annotations
 
 import numpy as np
 
-from ..ml.features import HOME_ADV_ELO
+from ..ml.features import HOME_ADV_RATING
 
 LEAGUE_AVG_GOALS = 1.35
 GOAL_SPREAD_K = 0.55
 MAX_GOALS = 10
 
 
-def expected_goals(elo_a: float, elo_b: float, home_advantage: int = 0,
+def expected_goals(rating_a: float, rating_b: float, home_advantage: int = 0,
                    attack_a: float = LEAGUE_AVG_GOALS, defense_a: float = LEAGUE_AVG_GOALS,
                    attack_b: float = LEAGUE_AVG_GOALS, defense_b: float = LEAGUE_AVG_GOALS
                    ) -> tuple[float, float]:
-    """Blend an Elo-based expectation with each side's attack/defense profile."""
-    eff = (elo_a - elo_b) + 2.0 * HOME_ADV_ELO * home_advantage
+    """Blend a ranking-based expectation with each side's attack/defense profile."""
+    eff = (rating_a - rating_b) + 2.0 * HOME_ADV_RATING * home_advantage
     diff = eff / 400.0
     base_a = LEAGUE_AVG_GOALS * np.exp(GOAL_SPREAD_K * diff)
     base_b = LEAGUE_AVG_GOALS * np.exp(-GOAL_SPREAD_K * diff)

@@ -76,10 +76,11 @@ def team_detail(team_id: int):
 @app.get("/api/predictions")
 def predictions():
     st = get_state()
+    board = st.leaderboard()
     return {
-        "leaderboard": st.leaderboard(),
-        "favourite": st.leaderboard()[0],
-        "simulations": st.mc and len(st.teams) and 5000,
+        "leaderboard": board,
+        "favourite": board[0],
+        "simulations": 5000,
         "disclaimer": DISCLAIMER,
     }
 
@@ -121,6 +122,19 @@ def simulate(req: SimulateRequest):
 def bracket():
     st = get_state()
     return {"bracket": st.bracket, "disclaimer": DISCLAIMER}
+
+
+@app.get("/api/sentiment")
+def sentiment():
+    st = get_state()
+    table = st.sentiment_table()
+    return {
+        "sentiment": table,
+        "most_positive": max(table, key=lambda r: r["positivity"]),
+        "most_buzz": table[0],
+        "source": "Curated social-media snapshot (pluggable to a live X API); not a live scrape.",
+        "disclaimer": DISCLAIMER,
+    }
 
 
 @app.get("/api/model-metrics")

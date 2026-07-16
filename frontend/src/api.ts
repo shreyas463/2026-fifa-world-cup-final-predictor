@@ -31,23 +31,36 @@ export interface StageProbs {
   group_advance: number;
 }
 
+export interface SentimentDetail {
+  team: string;
+  positivity: number;
+  buzz: number;
+  trend: number;
+  sample_posts: number;
+  mood: string;
+  momentum: string;
+}
+
 export interface Team {
   id: number;
   name: string;
   flag: string;
   confederation: string;
-  elo: number;
+  group: string;
+  fifa_points: number;
   form: number;
   squad_value_m: number;
+  availability: number;
   wc_titles: number;
   wc_appearances: number;
   host: boolean;
   fifa_rank: number;
-  group: string;
+  sentiment: number;
   attack: number;
   defense: number;
   probabilities: StageProbs;
   win_probability: number;
+  sentiment_detail: SentimentDetail;
   rank?: number;
 }
 
@@ -74,6 +87,7 @@ export interface MatchPrediction {
 
 export interface KnockoutMatch {
   round: string;
+  dates?: string;
   team_a: { id: number; name: string; flag: string; group: string };
   team_b: { id: number; name: string; flag: string; group: string };
   score_a?: number;
@@ -82,10 +96,22 @@ export interface KnockoutMatch {
   winner_id: number;
 }
 
+interface BracketTeam {
+  id: number;
+  name: string;
+  flag: string;
+}
+
 export interface Bracket {
-  groups: Record<string, { id: number; name: string; flag: string; qualified: boolean }[]>;
-  knockout: { name: string; matches: KnockoutMatch[] }[];
+  is_projection: boolean;
+  schedule: { round: string; dates: string }[];
+  groups: Record<string, (BracketTeam & { group: string; qualified: boolean; position: string })[]>;
+  knockout: { name: string; dates: string; matches: KnockoutMatch[] }[];
+  final: KnockoutMatch & { dates: string };
+  third_place: KnockoutMatch & { dates: string };
   champion: Team;
+  runner_up: BracketTeam;
+  third: BracketTeam;
 }
 
 export interface Simulation {
@@ -95,14 +121,24 @@ export interface Simulation {
   champion: Team;
 }
 
+export interface SentimentRow extends SentimentDetail {
+  id: number;
+  name: string;
+  flag: string;
+  group: string;
+  win_probability: number;
+}
+
 export interface ModelMetrics {
   best_model: string;
   metrics: Record<string, number>;
   model_comparison: Record<string, Record<string, number>>;
+  validation_log_loss: Record<string, number>;
+  overfitting_check: Record<string, number>;
   confusion_matrix: { labels: string[]; matrix: number[][] };
   feature_importance: { feature: string; importance: number }[];
   calibration_curve: { predicted: number; observed: number; count: number }[];
-  training: { n_matches: number; n_train: number; n_test: number; features: string[]; class_labels: string[] };
+  training: { n_matches: number; n_train: number; n_validation: number; n_test: number; features: string[]; class_labels: string[] };
   data_sources: string[];
   limitations: string[];
 }
@@ -132,6 +168,10 @@ export const api = {
     >(`/api/simulate-tournament`, { simulations, seed }),
   bracket: () => get<{ bracket: Bracket; disclaimer: string }>(`/api/bracket`),
   metrics: () => get<{ metrics: ModelMetrics; disclaimer: string }>(`/api/model-metrics`),
+  sentiment: () =>
+    get<{ sentiment: SentimentRow[]; most_positive: SentimentRow; most_buzz: SentimentRow; source: string; disclaimer: string }>(
+      `/api/sentiment`
+    ),
   comparison: (team_a: number, team_b: number) =>
     get<{
       team_a: TeamDetail;

@@ -9,6 +9,7 @@ const LINKS = [
   { to: "/bracket", label: "Bracket" },
   { to: "/compare", label: "Compare" },
   { to: "/leaderboard", label: "Leaderboard" },
+  { to: "/sentiment", label: "Sentiment" },
   { to: "/model", label: "Model Insights" },
 ];
 

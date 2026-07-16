@@ -60,9 +60,9 @@ export default function TeamDetail() {
       </div>
 
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard label="FIFA / Elo rank" value={`#${t.fifa_rank}`} sub={`Elo ${t.elo}`} />
-        <StatCard label="Recent form" value={t.form} sub="0–100 index" />
-        <StatCard label="Squad value" value={`€${t.squad_value_m}M`} />
+        <StatCard label="FIFA rank (field)" value={`#${t.fifa_rank}`} sub={`${Math.round(t.fifa_points)} pts`} />
+        <StatCard label="Recent form" value={t.form} sub={`Squad fit ${t.availability}%`} />
+        <StatCard label="Fan sentiment" value={`${Math.round(t.sentiment)}`} sub={t.sentiment_detail.mood} />
         <StatCard label="Win World Cup" value={pct(t.probabilities.winner)} accent />
       </div>
 
