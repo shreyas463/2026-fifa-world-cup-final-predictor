@@ -8,6 +8,7 @@ export default function MatchPredictor() {
   const [a, setA] = useState<number>(1);
   const [b, setB] = useState<number>(2);
   const [neutral, setNeutral] = useState(true);
+  const [knockoutMode, setKnockoutMode] = useState(true);
   const [result, setResult] = useState<MatchPrediction | null>(null);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -62,22 +63,28 @@ export default function MatchPredictor() {
         </button>
       </div>
 
-      <label className="mt-3 flex items-center gap-2 text-sm text-slate-400">
-        <input type="checkbox" checked={neutral} onChange={(e) => setNeutral(e.target.checked)} className="accent-pitch-500" />
-        Neutral venue (uncheck to apply host advantage)
-      </label>
+      <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400">
+        <label className="flex items-center gap-2">
+          <input type="checkbox" checked={neutral} onChange={(e) => setNeutral(e.target.checked)} className="accent-pitch-500" />
+          Neutral venue (uncheck to apply host advantage)
+        </label>
+        <label className="flex items-center gap-2">
+          <input type="checkbox" checked={knockoutMode} onChange={(e) => setKnockoutMode(e.target.checked)} className="accent-gold" />
+          Knockout tie — resolve draws with extra time &amp; penalties
+        </label>
+      </div>
 
       {err && <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">{err}</div>}
       {busy && <Loader label="Running the model…" />}
 
-      {result && !busy && <MatchResult r={result} />}
+      {result && !busy && <MatchResult r={result} knockout={knockoutMode} />}
 
       <Disclaimer />
     </div>
   );
 }
 
-function MatchResult({ r }: { r: MatchPrediction }) {
+function MatchResult({ r, knockout }: { r: MatchPrediction; knockout: boolean }) {
   const p = r.probabilities;
   const bars = [
     { label: r.team_a.name, value: p.team_a_win, color: "#12a150" },
@@ -121,6 +128,8 @@ function MatchResult({ r }: { r: MatchPrediction }) {
         <div className="mt-3 text-center text-xs text-slate-500">Model: {r.model}</div>
       </div>
 
+      {knockout && r.knockout?.applies && <KnockoutPanel r={r} />}
+
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="card p-6">
           <h3 className="mb-3 font-semibold text-white">Key factors</h3>
@@ -162,6 +171,89 @@ function MatchResult({ r }: { r: MatchPrediction }) {
                 #{r.ranking_comparison.team_a} / #{r.ranking_comparison.team_b}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function KnockoutPanel({ r }: { r: MatchPrediction }) {
+  const k = r.knockout!;
+  const a = r.team_a;
+  const b = r.team_b;
+  const winner = k.predicted.winner_id === a.id ? a : b;
+
+  return (
+    <div className="card p-6">
+      <div className="mb-1 flex flex-wrap items-center gap-2">
+        <span className="h-5 w-1 rounded-full bg-gold" />
+        <h3 className="font-semibold text-white">Knockout resolution</h3>
+        <span className="chip !border-gold/30 !text-amber-200">extra time &amp; penalties</span>
+      </div>
+      <p className="mb-5 pl-3 text-xs text-slate-400">If the tie is level after 90 minutes, here's how it plays out.</p>
+
+      {/* Verdict */}
+      <div className="mb-5 rounded-2xl border border-gold/25 bg-gold/[0.06] p-5 text-center">
+        <div className="eyebrow text-gold">Who advances</div>
+        <div className="mt-2 flex items-center justify-center gap-3">
+          <span className="text-4xl">{winner.flag}</span>
+          <div className="text-left">
+            <div className="text-xl font-extrabold text-white">{winner.name} advance</div>
+            <div className="text-sm text-slate-300">{k.predicted.headline}</div>
+          </div>
+        </div>
+        <div className="mt-3 inline-block rounded-lg bg-white/10 px-3 py-1 font-mono text-lg font-bold text-white">
+          {k.predicted.resolved_score}
+        </div>
+      </div>
+
+      {/* Advance probabilities */}
+      <div className="mb-6">
+        <div className="mb-1.5 flex justify-between text-xs text-slate-400">
+          <span>{a.flag} {a.name} advance <b className="text-slate-200">{pct(k.advance.team_a)}</b></span>
+          <span><b className="text-slate-200">{pct(k.advance.team_b)}</b> {b.name} {b.flag}</span>
+        </div>
+        <div className="flex h-3 overflow-hidden rounded-full bg-white/10">
+          <div style={{ width: `${k.advance.team_a * 100}%`, background: "#12a150" }} />
+          <div style={{ width: `${k.advance.team_b * 100}%`, background: "#3b82f6" }} />
+        </div>
+      </div>
+
+      {/* Journey stages */}
+      <div className="grid gap-3 sm:grid-cols-3">
+        <div className="rounded-xl border border-white/10 bg-night-900 p-4">
+          <div className="text-2xl">⏱️</div>
+          <div className="mt-1 font-semibold text-white">90 minutes</div>
+          <div className="mt-1 text-2xl font-bold text-white">
+            {r.predicted_score.team_a}–{r.predicted_score.team_b}
+          </div>
+          <div className="mt-1 text-xs text-slate-400">Settled here {pct(k.decided_in.regulation)}</div>
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-night-900 p-4">
+          <div className="text-2xl">⏳</div>
+          <div className="mt-1 font-semibold text-white">Extra time</div>
+          <div className="mt-1 text-xs text-slate-400">Reached {pct(k.reaches_extra_time_prob)}</div>
+          {k.extra_time.added_score && (
+            <div className="mt-1 text-sm text-slate-300">
+              Adds ~{k.extra_time.added_score.team_a}–{k.extra_time.added_score.team_b}
+            </div>
+          )}
+          <div className="mt-1 text-xs text-slate-400">Settled here {pct(k.decided_in.extra_time)}</div>
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-night-900 p-4">
+          <div className="text-2xl">🥅</div>
+          <div className="mt-1 font-semibold text-white">Penalties</div>
+          <div className="mt-1 text-xs text-slate-400">Reached {pct(k.reaches_penalties_prob)}</div>
+          {k.penalties.score && (
+            <div className="mt-1 text-sm text-slate-300">
+              Shootout {k.penalties.score.team_a}–{k.penalties.score.team_b}
+            </div>
+          )}
+          <div className="mt-1 text-xs text-slate-400">
+            {a.name} {pct(k.penalties.team_a_win_if_reached)} · {b.name} {pct(k.penalties.team_b_win_if_reached)}
           </div>
         </div>
       </div>

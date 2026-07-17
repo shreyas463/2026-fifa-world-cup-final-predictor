@@ -72,6 +72,86 @@ def _key_factors(a: Team, b: Team, home_adv: int) -> list[dict]:
     return sorted(out, key=lambda f: -f["weight"])
 
 
+def _pen_win_prob(ea: float, eb: float) -> float:
+    """Penalty shootout is close to a coin flip; the stronger side gets a small edge."""
+    p = 1.0 / (1.0 + 10 ** ((eb - ea) / 1500.0))
+    return float(np.clip(p, 0.42, 0.58))
+
+
+def _knockout(a: Team, b: Team, ea: float, eb: float, lam_a: float, lam_b: float,
+              p_a: float, p_draw: float, p_b: float, reg_score: tuple[int, int]) -> dict:
+    """Resolve a level knockout tie through extra time and penalties.
+
+    Extra time is modelled as ~1/3 of a regulation match. If still level after
+    120', the shootout winner is drawn from a near-even, mildly Elo-weighted
+    probability. Returns per-stage odds, who advances overall, and the single
+    most-likely full storyline (score → a.e.t. → penalties).
+    """
+    et_a, et_b = lam_a / 3.0, lam_b / 3.0
+    pa_et, pd_et, pb_et = outcome_probs(et_a, et_b)
+    p_pen_a = _pen_win_prob(ea, eb)
+
+    adv_a = p_a + p_draw * (pa_et + pd_et * p_pen_a)
+    adv_b = p_b + p_draw * (pb_et + pd_et * (1 - p_pen_a))
+    tot = adv_a + adv_b or 1.0
+    adv_a, adv_b = adv_a / tot, adv_b / tot
+
+    reach_pen = p_draw * pd_et
+    sa, sb = reg_score
+    et_added = None
+    pen = None
+
+    if sa != sb:  # decided in regulation
+        method = "regulation"
+        w = a if sa > sb else b
+        resolved = f"{sa}–{sb}"
+        headline = f"{w.name} win {max(sa, sb)}–{min(sa, sb)} in normal time"
+    else:
+        ega, egb = most_likely_score(et_a, et_b)
+        et_added = {"team_a": ega, "team_b": egb}
+        if ega != egb:  # decided in extra time
+            method = "extra_time"
+            w = a if ega > egb else b
+            ta, tb = sa + ega, sb + egb
+            resolved = f"{ta}–{tb} (a.e.t.)"
+            headline = f"{w.name} win {max(ta, tb)}–{min(ta, tb)} after extra time"
+        else:  # penalties
+            method = "penalties"
+            w = a if p_pen_a >= 0.5 else b
+            hi, lo = (5, 3) if abs(ea - eb) > 150 else (4, 3)
+            pen_a, pen_b = (hi, lo) if w is a else (lo, hi)
+            pen = {"team_a": pen_a, "team_b": pen_b}
+            resolved = f"{sa}–{sb} ({pen_a}–{pen_b} pens)"
+            headline = f"{w.name} win {hi}–{lo} on penalties (after {sa}–{sb})"
+
+    return {
+        "applies": True,
+        "reaches_extra_time_prob": round(p_draw, 4),
+        "reaches_penalties_prob": round(reach_pen, 4),
+        "decided_in": {
+            "regulation": round(1 - p_draw, 4),
+            "extra_time": round(p_draw * (1 - pd_et), 4),
+            "penalties": round(reach_pen, 4),
+        },
+        "extra_time": {
+            "team_a_win_if_reached": round(pa_et, 4),
+            "draw_if_reached": round(pd_et, 4),
+            "team_b_win_if_reached": round(pb_et, 4),
+            "added_score": et_added,
+        },
+        "penalties": {
+            "team_a_win_if_reached": round(p_pen_a, 4),
+            "team_b_win_if_reached": round(1 - p_pen_a, 4),
+            "score": pen,
+        },
+        "advance": {"team_a": round(adv_a, 4), "team_b": round(adv_b, 4)},
+        "predicted": {
+            "winner_id": w.id, "winner": w.name, "method": method,
+            "resolved_score": resolved, "headline": headline,
+        },
+    }
+
+
 def predict_match(a: Team, b: Team, neutral: bool = True) -> dict:
     home_adv = _home_advantage(a, b, neutral)
     h2h_diff = head_to_head_diff(a.name, b.name)
@@ -90,6 +170,7 @@ def predict_match(a: Team, b: Team, neutral: bool = True) -> dict:
 
     lam_a, lam_b = expected_goals(ea, eb, home_adv, a.attack, a.defense, b.attack, b.defense)
     sa, sb = most_likely_score(lam_a, lam_b)
+    knockout = _knockout(a, b, ea, eb, lam_a, lam_b, p_a, p_draw, p_b, (sa, sb))
 
     h2h_games = head_to_head_games(a.name, b.name)
     return {
@@ -97,6 +178,7 @@ def predict_match(a: Team, b: Team, neutral: bool = True) -> dict:
         "probabilities": {"team_a_win": round(p_a, 4), "draw": round(p_draw, 4), "team_b_win": round(p_b, 4)},
         "expected_goals": {"team_a": round(lam_a, 2), "team_b": round(lam_b, 2)},
         "predicted_score": {"team_a": sa, "team_b": sb},
+        "knockout": knockout,
         "head_to_head": h2h_games,
         "head_to_head_note": "Real past meetings" if h2h_games else "No recent meetings on record",
         "form_comparison": {"team_a": a.form, "team_b": b.form},

@@ -75,6 +75,26 @@ export interface TeamDetail extends Team {
   weaknesses: string[];
 }
 
+export interface Knockout {
+  applies: boolean;
+  reaches_extra_time_prob: number;
+  reaches_penalties_prob: number;
+  decided_in: { regulation: number; extra_time: number; penalties: number };
+  extra_time: {
+    team_a_win_if_reached: number;
+    draw_if_reached: number;
+    team_b_win_if_reached: number;
+    added_score: { team_a: number; team_b: number } | null;
+  };
+  penalties: {
+    team_a_win_if_reached: number;
+    team_b_win_if_reached: number;
+    score: { team_a: number; team_b: number } | null;
+  };
+  advance: { team_a: number; team_b: number };
+  predicted: { winner_id: number; winner: string; method: string; resolved_score: string; headline: string };
+}
+
 export interface MatchPrediction {
   team_a: Team;
   team_b: Team;
@@ -82,6 +102,7 @@ export interface MatchPrediction {
   probabilities: { team_a_win: number; draw: number; team_b_win: number };
   expected_goals: { team_a: number; team_b: number };
   predicted_score: { team_a: number; team_b: number };
+  knockout?: Knockout;
   head_to_head: { year: number; team_a: string; team_b: string; score_a: number; score_b: number }[];
   head_to_head_note?: string;
   form_comparison: { team_a: number; team_b: number };
