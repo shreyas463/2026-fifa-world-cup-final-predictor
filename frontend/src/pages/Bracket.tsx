@@ -10,6 +10,7 @@ export default function Bracket() {
   if (error) return <ErrorMessage message={error} onRetry={reload} />;
   if (!data) return null;
   const b = data.bracket;
+  const complete = b.complete ?? !b.champion.predicted;
 
   // Append the Final as a last round column so the bracket reads left-to-right.
   const rounds = [...b.knockout, { name: "Final", dates: b.final.dates, matches: [b.final] }];
@@ -18,7 +19,11 @@ export default function Bracket() {
     <div>
       <SectionTitle
         title="Tournament Bracket"
-        subtitle="Real recorded results through the semifinals — the final & third-place play-off are the model's predictions. Click any match for details."
+        subtitle={
+          complete
+            ? "The complete 2026 World Cup — real recorded results from the group stage to the final. Click any match for details."
+            : "Real recorded results through the semifinals — the final & third-place play-off are the model's predictions. Click any match for details."
+        }
       />
 
       {b.results_source && (
@@ -96,9 +101,18 @@ export default function Bracket() {
       </div>
 
       <p className="mt-4 text-center text-xs text-slate-500">
-        Group stage through the semifinals show <b className="text-slate-400">real recorded scores</b> (penalty
-        shootouts resolved from the dataset). The final and third-place play-off are unplayed as of {b.as_of ?? "today"} and
-        show the model's prediction.
+        {complete ? (
+          <>
+            Every match shows the <b className="text-slate-400">real recorded score</b> (penalty shootouts resolved from
+            the dataset). 🇪🇸 Spain — the model's pre-tournament favourite (~41%) — lifted the trophy.
+          </>
+        ) : (
+          <>
+            Group stage through the semifinals show <b className="text-slate-400">real recorded scores</b> (penalty
+            shootouts resolved from the dataset). The final and third-place play-off are unplayed as of {b.as_of ?? "today"} and
+            show the model's prediction.
+          </>
+        )}
       </p>
 
       <Disclaimer text={data.disclaimer} />

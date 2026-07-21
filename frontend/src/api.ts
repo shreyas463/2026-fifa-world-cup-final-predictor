@@ -133,6 +133,7 @@ interface BracketTeam {
 
 export interface Bracket {
   is_projection: boolean;
+  complete?: boolean;
   results_source?: string;
   as_of?: string;
   schedule: { round: string; dates: string }[];

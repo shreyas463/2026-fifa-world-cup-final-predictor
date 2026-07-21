@@ -1,7 +1,8 @@
 {
   "is_projection": false,
-  "results_source": "Real recorded results (martj42 dataset); final & third-place are model predictions (unplayed).",
-  "as_of": "2026-07-15",
+  "complete": true,
+  "results_source": "Real recorded results \u2014 the complete 2026 World Cup (martj42 dataset).",
+  "as_of": "2026-07-19",
   "schedule": [
     {
       "round": "Group stage",
@@ -1244,7 +1245,6 @@
   ],
   "final": {
     "round": "Final",
-    "dates": "Sunday, Jul 19, 2026",
     "team_a": {
       "id": 29,
       "name": "Spain",
@@ -1260,18 +1260,13 @@
     "score_a": 1,
     "score_b": 0,
     "penalties": false,
-    "played": false,
-    "predicted": true,
+    "played": true,
+    "predicted": false,
     "winner_id": 29,
-    "win_probabilities": {
-      "team_a": 0.482,
-      "draw": 0.262,
-      "team_b": 0.256
-    }
+    "dates": "Sunday, Jul 19, 2026"
   },
   "third_place": {
     "round": "Third-place play-off",
-    "dates": "Saturday, Jul 18, 2026",
     "team_a": {
       "id": 33,
       "name": "France",
@@ -1284,17 +1279,13 @@
       "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f",
       "group": "L"
     },
-    "score_a": 2,
-    "score_b": 1,
+    "score_a": 4,
+    "score_b": 6,
     "penalties": false,
-    "played": false,
-    "predicted": true,
-    "winner_id": 33,
-    "win_probabilities": {
-      "team_a": 0.491,
-      "draw": 0.26,
-      "team_b": 0.249
-    }
+    "played": true,
+    "predicted": false,
+    "winner_id": 45,
+    "dates": "Saturday, Jul 18, 2026"
   },
   "champion": {
     "id": 29,
@@ -1303,7 +1294,7 @@
     "confederation": "UEFA",
     "group": "H",
     "fifa_points": 1912.34,
-    "form": 80,
+    "form": 87,
     "squad_value_m": 1000,
     "availability": 92,
     "wc_titles": 1,
@@ -1311,11 +1302,11 @@
     "host": false,
     "fifa_rank": 3,
     "sentiment": 88.0,
-    "elo": 2163.2,
-    "attack": 1.95,
-    "defense": 0.28,
+    "elo": 2180.8,
+    "attack": 1.71,
+    "defense": 0.21,
     "real_data": true,
-    "predicted": true
+    "predicted": false
   },
   "runner_up": {
     "id": 37,
@@ -1324,9 +1315,9 @@
     "group": "J"
   },
   "third": {
-    "id": 33,
-    "name": "France",
-    "flag": "\ud83c\uddeb\ud83c\uddf7",
-    "group": "I"
+    "id": 45,
+    "name": "England",
+    "flag": "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f",
+    "group": "L"
   }
 }

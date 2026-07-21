@@ -1,10 +1,10 @@
 """Build the 2026 World Cup bracket from the REAL recorded results in the
 martj42 dataset.
 
-Every played match (group stage through the semifinals) uses the actual
-scoreline and winner (penalty shootouts resolved from shootouts.csv). The final
-and third-place play-off are, as of the data snapshot, genuinely UNPLAYED — so
-those two are filled by the model as clearly-flagged predictions.
+Every played match uses the actual scoreline and winner (penalty shootouts
+resolved from shootouts.csv). The final and third-place play-off use the real
+recorded result once played; while still unplayed they are filled by the model
+as clearly-flagged predictions.
 
 The built bracket is cached to artifacts/bracket_2026.json so the API runs
 without the raw dataset present.
@@ -163,23 +163,40 @@ def build_bracket(teams, predict_fn) -> dict:
     sf_losers = [by_name[o["team_b"]["name"]] if o["winner_id"] == o["team_a"]["id"]
                  else by_name[o["team_a"]["name"]] for o in sf_objs]
 
-    final = _predicted_match(finalists[0], finalists[1], "Final", FINAL_DATE, predict_fn)
-    third = _predicted_match(sf_losers[0], sf_losers[1], "Third-place play-off", THIRD_DATE, predict_fn)
+    # Use the real recorded final / third-place if they've been played; else predict.
+    post_sf = wc[wc["date"] > pd.Timestamp("2026-07-15")]
+
+    def resolve(a, b, round_name, dates):
+        for m in post_sf.itertuples(index=False):
+            if {m.home_team, m.away_team} == {a.name, b.name} and not (
+                pd.isna(m.home_score) or pd.isna(m.away_score)):
+                obj, _ = match_obj(m, round_name, predicted=False)
+                obj["dates"] = dates
+                return obj
+        return _predicted_match(a, b, round_name, dates, predict_fn)
+
+    final = resolve(finalists[0], finalists[1], "Final", FINAL_DATE)
+    third = resolve(sf_losers[0], sf_losers[1], "Third-place play-off", THIRD_DATE)
 
     champ = by_name[final["team_a"]["name"]] if final["winner_id"] == final["team_a"]["id"] else by_name[final["team_b"]["name"]]
     runner = by_name[final["team_b"]["name"]] if final["winner_id"] == final["team_a"]["id"] else by_name[final["team_a"]["name"]]
     third_team = by_name[third["team_a"]["name"]] if third["winner_id"] == third["team_a"]["id"] else by_name[third["team_b"]["name"]]
 
+    complete = bool(final.get("played") and third.get("played"))
     return {
         "is_projection": False,
-        "results_source": "Real recorded results (martj42 dataset); final & third-place are model predictions (unplayed).",
-        "as_of": "2026-07-15",
+        "complete": complete,
+        "results_source": (
+            "Real recorded results — the complete 2026 World Cup (martj42 dataset)."
+            if complete else
+            "Real recorded results (martj42 dataset); final & third-place are model predictions (unplayed)."),
+        "as_of": str(wc["date"].max().date()),
         "schedule": SCHEDULE,
         "groups": group_view,
         "knockout": knockout,
         "final": final,
         "third_place": third,
-        "champion": {**champ.to_dict(), "predicted": True},
+        "champion": {**champ.to_dict(), "predicted": not bool(final.get("played"))},
         "runner_up": _td(runner),
         "third": _td(third_team),
     }

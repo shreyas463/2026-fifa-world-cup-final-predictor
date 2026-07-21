@@ -1,63 +1,63 @@
 {
   "best_model": "Logistic Regression",
   "metrics": {
-    "accuracy": 0.6057,
-    "log_loss": 0.8627,
+    "accuracy": 0.6056,
+    "log_loss": 0.8628,
     "precision": 0.3996,
-    "recall": 0.506,
-    "f1": 0.4445,
-    "roc_auc": 0.7438,
+    "recall": 0.5058,
+    "f1": 0.4444,
+    "roc_auc": 0.7437,
     "brier": 0.5068
   },
   "model_comparison": {
     "Logistic Regression": {
-      "accuracy": 0.6057,
-      "log_loss": 0.8627,
+      "accuracy": 0.6056,
+      "log_loss": 0.8628,
       "precision": 0.3996,
-      "recall": 0.506,
-      "f1": 0.4445,
-      "roc_auc": 0.7438,
+      "recall": 0.5058,
+      "f1": 0.4444,
+      "roc_auc": 0.7437,
       "brier": 0.5068
     },
     "Random Forest": {
-      "accuracy": 0.6054,
-      "log_loss": 0.866,
-      "precision": 0.4008,
-      "recall": 0.5052,
-      "f1": 0.4445,
-      "roc_auc": 0.7458,
-      "brier": 0.5083
+      "accuracy": 0.6045,
+      "log_loss": 0.8664,
+      "precision": 0.4004,
+      "recall": 0.5042,
+      "f1": 0.4437,
+      "roc_auc": 0.7448,
+      "brier": 0.5085
     },
     "Gradient Boosting": {
-      "accuracy": 0.6057,
-      "log_loss": 0.8629,
-      "precision": 0.5303,
-      "recall": 0.5071,
-      "f1": 0.4501,
-      "roc_auc": 0.7446,
-      "brier": 0.507
+      "accuracy": 0.6056,
+      "log_loss": 0.8618,
+      "precision": 0.5393,
+      "recall": 0.5064,
+      "f1": 0.4483,
+      "roc_auc": 0.7456,
+      "brier": 0.5064
     },
     "Poisson (baseline)": {
       "accuracy": 0.6065,
       "log_loss": 0.8937,
-      "precision": 0.3981,
-      "recall": 0.5093,
-      "f1": 0.4459,
-      "roc_auc": 0.7395,
+      "precision": 0.398,
+      "recall": 0.5091,
+      "f1": 0.4458,
+      "roc_auc": 0.7392,
       "brier": 0.5228
     }
   },
   "validation_log_loss": {
-    "Logistic Regression": 0.855,
-    "Random Forest": 0.8609,
-    "Gradient Boosting": 0.8608
+    "Logistic Regression": 0.8549,
+    "Random Forest": 0.8611,
+    "Gradient Boosting": 0.8598
   },
   "overfitting_check": {
-    "train_accuracy": 0.5818,
-    "test_accuracy": 0.6057,
+    "train_accuracy": 0.5817,
+    "test_accuracy": 0.6056,
     "accuracy_gap": -0.0239,
     "train_log_loss": 0.8998,
-    "test_log_loss": 0.8627
+    "test_log_loss": 0.8628
   },
   "confusion_matrix": {
     "labels": [
@@ -67,7 +67,7 @@
     ],
     "matrix": [
       [
-        1456,
+        1457,
         0,
         191
       ],
@@ -77,7 +77,7 @@
         278
       ],
       [
-        377,
+        378,
         0,
         653
       ]
@@ -86,11 +86,11 @@
   "feature_importance": [
     {
       "feature": "elo_diff",
-      "importance": 0.5026
+      "importance": 0.5027
     },
     {
       "feature": "ga_diff",
-      "importance": 0.1601
+      "importance": 0.16
     },
     {
       "feature": "home_advantage",
@@ -131,9 +131,9 @@
       "count": 358
     },
     {
-      "predicted": 0.45,
-      "observed": 0.427,
-      "count": 433
+      "predicted": 0.451,
+      "observed": 0.428,
+      "count": 435
     },
     {
       "predicted": 0.553,
@@ -162,10 +162,10 @@
     }
   ],
   "training": {
-    "n_matches": 32400,
+    "n_matches": 32402,
     "n_train": 26607,
     "n_validation": 2311,
-    "n_test": 3482,
+    "n_test": 3484,
     "features": [
       "elo_diff",
       "form_diff",
@@ -179,8 +179,8 @@
       "Draw",
       "Away win"
     ],
-    "history_span": "1872-11-30 to 2026-07-15",
-    "total_internationals": 49518,
+    "history_span": "1872-11-30 to 2026-07-19",
+    "total_internationals": 49520,
     "split": "chronological \u2014 train <2021, validation 2021\u2013mid-2023, test mid-2023 onward"
   },
   "data_sources": [

@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-07-15",
+  "as_of": "2026-07-19",
   "teams": {
     "Mexico": {
       "elo": 1926.6,
@@ -198,11 +198,11 @@
       "matches": 419
     },
     "Spain": {
-      "elo": 2163.2,
-      "form": 80.0,
-      "gf": 1.95,
-      "ga": 0.28,
-      "matches": 790
+      "elo": 2180.8,
+      "form": 86.7,
+      "gf": 1.71,
+      "ga": 0.21,
+      "matches": 791
     },
     "Cape Verde": {
       "elo": 1647.3,
@@ -226,11 +226,11 @@
       "matches": 973
     },
     "France": {
-      "elo": 2086.3,
-      "form": 80.0,
-      "gf": 1.79,
-      "ga": 0.78,
-      "matches": 942
+      "elo": 2055.5,
+      "form": 70.0,
+      "gf": 2.34,
+      "ga": 2.08,
+      "matches": 943
     },
     "Senegal": {
       "elo": 1837.0,
@@ -254,11 +254,11 @@
       "matches": 878
     },
     "Argentina": {
-      "elo": 2155.2,
-      "form": 100.0,
-      "gf": 2.66,
+      "elo": 2137.6,
+      "form": 90.0,
+      "gf": 2.0,
       "ga": 1.03,
-      "matches": 1076
+      "matches": 1077
     },
     "Algeria": {
       "elo": 1806.1,
@@ -310,11 +310,11 @@
       "matches": 643
     },
     "England": {
-      "elo": 2036.7,
-      "form": 73.3,
-      "gf": 1.85,
-      "ga": 1.2,
-      "matches": 1097
+      "elo": 2067.5,
+      "form": 83.3,
+      "gf": 2.89,
+      "ga": 1.9,
+      "matches": 1098
     },
     "Croatia": {
       "elo": 1893.3,
@@ -382,7 +382,7 @@
     "France|Spain": -1.0,
     "France|Norway": 1.2,
     "Australia|New Zealand": 1.6,
-    "England|France": -0.2,
+    "England|France": 0.4,
     "England|Sweden": 0.4,
     "Norway|Switzerland": -0.6,
     "Germany|Norway": 2.2,
@@ -484,7 +484,7 @@
     "Switzerland|Turkey": 0.0,
     "Spain|Turkey": 2.2,
     "Curacao|Netherlands": -2.4,
-    "Argentina|Spain": -0.4,
+    "Argentina|Spain": -1.0,
     "England|Uruguay": -0.2,
     "Haiti|Mexico": -2.0,
     "Portugal|South Africa": 2.0,
@@ -505,8 +505,8 @@
     "Belgium|Turkey": 0.2,
     "Netherlands|Turkey": 0.2,
     "Iran|South Korea": -0.2,
-    "Mexico|Sweden": -0.8,
     "France|Paraguay": 1.4,
+    "Mexico|Sweden": -0.8,
     "Argentina|Germany": -0.2,
     "Paraguay|Scotland": 1.0,
     "Egypt|Germany": 1.0,
@@ -850,8 +850,8 @@
     "Argentina|Bosnia and Herzegovina": 2.67,
     "Czech Republic|Paraguay": 1.0,
     "Czech Republic|Japan": -0.33,
-    "Czech Republic|South Korea": 0.75,
     "Norway|Saudi Arabia": 6.0,
+    "Czech Republic|South Korea": 0.75,
     "Netherlands|Paraguay": 2.0,
     "Croatia|Iran": 1.0,
     "Belgium|Colombia": 0.0,
@@ -899,8 +899,8 @@
     "Ecuador|Panama": 1.8,
     "Bosnia and Herzegovina|Turkey": -0.2,
     "Austria|Iran": 4.0,
-    "Bosnia and Herzegovina|Spain": -1.4,
     "Belgium|Croatia": 0.8,
+    "Bosnia and Herzegovina|Spain": -1.4,
     "Croatia|Scotland": -0.2,
     "Qatar|Uzbekistan": -1.0,
     "Qatar|Sweden": -0.5,
@@ -916,14 +916,14 @@
     "South Korea|Tunisia": 1.0,
     "Saudi Arabia|Uruguay": 0.0,
     "Ecuador|South Africa": 0.0,
-    "Japan|Norway": -3.0,
     "Algeria|Belgium": -1.0,
+    "Japan|Norway": -3.0,
     "Canada|Switzerland": 0.5,
     "Scotland|South Korea": -3.0,
     "Scotland|South Africa": -0.5,
     "England|South Korea": 0.0,
-    "South Africa|Turkey": 2.0,
     "Ecuador|Senegal": -1.0,
+    "South Africa|Turkey": 2.0,
     "Paraguay|South Africa": -0.75,
     "Senegal|Uruguay": 0.0,
     "South Africa|Spain": -0.75,
@@ -1126,8 +1126,8 @@
     "Croatia|Saudi Arabia": 1.0,
     "Ghana|Switzerland": 2.0,
     "Jordan|Spain": -2.0,
-    "Netherlands|Senegal": 2.0,
     "England|Iran": 4.0,
+    "Netherlands|Senegal": 2.0,
     "Qatar|Senegal": -2.0,
     "Canada|Croatia": -3.0,
     "Netherlands|Qatar": 2.0,
@@ -1158,8 +1158,8 @@
     "Austria|South Korea": 1.0,
     "Ivory Coast|Scotland": 1.0,
     "Curacao|Scotland": -3.0,
-    "Jordan|Switzerland": -3.0,
     "Senegal|USA": -1.0,
+    "Jordan|Switzerland": -3.0,
     "Haiti|New Zealand": 4.0,
     "Algeria|Netherlands": 1.0,
     "Bosnia and Herzegovina|Panama": 0.0,
@@ -1171,32 +1171,32 @@
     "Cape Verde|Spain": 0.0,
     "Iraq|Norway": -3.0,
     "Austria|Jordan": 2.0,
+    "Ghana|Panama": 1.0,
     "DR Congo|Portugal": 0.0,
     "Colombia|Uzbekistan": 2.0,
-    "Ghana|Panama": 1.0,
     "Paraguay|Turkey": 1.0,
     "Curacao|Ecuador": 0.0,
-    "Cape Verde|Uruguay": 0.0,
     "Belgium|Iran": 0.0,
+    "Cape Verde|Uruguay": 0.0,
     "France|Iraq": 3.0,
     "Portugal|Uzbekistan": 5.0,
     "Colombia|DR Congo": 1.0,
     "Croatia|Panama": 1.0,
-    "Haiti|Morocco": -2.0,
     "South Africa|South Korea": 1.0,
+    "Haiti|Morocco": -2.0,
     "Curacao|Ivory Coast": -2.0,
-    "Iraq|Senegal": -5.0,
-    "Cape Verde|Saudi Arabia": 0.0,
     "Belgium|New Zealand": 4.0,
+    "Cape Verde|Saudi Arabia": 0.0,
+    "Iraq|Senegal": -5.0,
+    "Croatia|Ghana": 1.0,
+    "DR Congo|Uzbekistan": 2.0,
     "Argentina|Jordan": 2.0,
     "Colombia|Portugal": 0.0,
-    "DR Congo|Uzbekistan": 2.0,
-    "Croatia|Ghana": 1.0,
     "Ivory Coast|Norway": -1.0,
     "DR Congo|England": -1.0,
     "Belgium|Senegal": 1.0,
-    "Colombia|Ghana": 1.0,
-    "Argentina|Cape Verde": 1.0
+    "Argentina|Cape Verde": 1.0,
+    "Colombia|Ghana": 1.0
   },
   "h2h_games": {
     "England|Scotland": [
@@ -2764,13 +2764,6 @@
     ],
     "England|France": [
       {
-        "year": 2010,
-        "home": "England",
-        "away": "France",
-        "hs": 1,
-        "as": 2
-      },
-      {
         "year": 2012,
         "home": "France",
         "away": "England",
@@ -2797,6 +2790,13 @@
         "away": "France",
         "hs": 1,
         "as": 2
+      },
+      {
+        "year": 2026,
+        "home": "France",
+        "away": "England",
+        "hs": 4,
+        "as": 6
       }
     ],
     "England|Sweden": [
@@ -6363,13 +6363,6 @@
     ],
     "Argentina|Spain": [
       {
-        "year": 1999,
-        "home": "Spain",
-        "away": "Argentina",
-        "hs": 0,
-        "as": 2
-      },
-      {
         "year": 2006,
         "home": "Spain",
         "away": "Argentina",
@@ -6396,6 +6389,13 @@
         "away": "Argentina",
         "hs": 6,
         "as": 1
+      },
+      {
+        "year": 2026,
+        "home": "Spain",
+        "away": "Argentina",
+        "hs": 1,
+        "as": 0
       }
     ],
     "England|Uruguay": [
@@ -7103,43 +7103,6 @@
         "as": 0
       }
     ],
-    "Mexico|Sweden": [
-      {
-        "year": 1994,
-        "home": "Mexico",
-        "away": "Sweden",
-        "hs": 2,
-        "as": 1
-      },
-      {
-        "year": 2005,
-        "home": "Mexico",
-        "away": "Sweden",
-        "hs": 0,
-        "as": 0
-      },
-      {
-        "year": 2009,
-        "home": "Mexico",
-        "away": "Sweden",
-        "hs": 0,
-        "as": 1
-      },
-      {
-        "year": 2018,
-        "home": "Mexico",
-        "away": "Sweden",
-        "hs": 0,
-        "as": 3
-      },
-      {
-        "year": 2022,
-        "home": "Mexico",
-        "away": "Sweden",
-        "hs": 1,
-        "as": 2
-      }
-    ],
     "France|Paraguay": [
       {
         "year": 1998,
@@ -7175,6 +7138,43 @@
         "away": "France",
         "hs": 0,
         "as": 1
+      }
+    ],
+    "Mexico|Sweden": [
+      {
+        "year": 1994,
+        "home": "Mexico",
+        "away": "Sweden",
+        "hs": 2,
+        "as": 1
+      },
+      {
+        "year": 2005,
+        "home": "Mexico",
+        "away": "Sweden",
+        "hs": 0,
+        "as": 0
+      },
+      {
+        "year": 2009,
+        "home": "Mexico",
+        "away": "Sweden",
+        "hs": 0,
+        "as": 1
+      },
+      {
+        "year": 2018,
+        "home": "Mexico",
+        "away": "Sweden",
+        "hs": 0,
+        "as": 3
+      },
+      {
+        "year": 2022,
+        "home": "Mexico",
+        "away": "Sweden",
+        "hs": 1,
+        "as": 2
       }
     ],
     "Argentina|Germany": [
@@ -17033,6 +17033,15 @@
         "as": 0
       }
     ],
+    "Norway|Saudi Arabia": [
+      {
+        "year": 1998,
+        "home": "Norway",
+        "away": "Saudi Arabia",
+        "hs": 6,
+        "as": 0
+      }
+    ],
     "Czech Republic|South Korea": [
       {
         "year": 1998,
@@ -17061,15 +17070,6 @@
         "away": "Czech Republic",
         "hs": 2,
         "as": 1
-      }
-    ],
-    "Norway|Saudi Arabia": [
-      {
-        "year": 1998,
-        "home": "Norway",
-        "away": "Saudi Arabia",
-        "hs": 6,
-        "as": 0
       }
     ],
     "Netherlands|Paraguay": [
@@ -18174,43 +18174,6 @@
         "as": 1
       }
     ],
-    "Bosnia and Herzegovina|Spain": [
-      {
-        "year": 2005,
-        "home": "Spain",
-        "away": "Bosnia and Herzegovina",
-        "hs": 1,
-        "as": 1
-      },
-      {
-        "year": 2008,
-        "home": "Spain",
-        "away": "Bosnia and Herzegovina",
-        "hs": 1,
-        "as": 0
-      },
-      {
-        "year": 2009,
-        "home": "Bosnia and Herzegovina",
-        "away": "Spain",
-        "hs": 2,
-        "as": 5
-      },
-      {
-        "year": 2016,
-        "home": "Bosnia and Herzegovina",
-        "away": "Spain",
-        "hs": 1,
-        "as": 3
-      },
-      {
-        "year": 2018,
-        "home": "Spain",
-        "away": "Bosnia and Herzegovina",
-        "hs": 1,
-        "as": 0
-      }
-    ],
     "Belgium|Croatia": [
       {
         "year": 2012,
@@ -18246,6 +18209,43 @@
         "away": "Belgium",
         "hs": 0,
         "as": 2
+      }
+    ],
+    "Bosnia and Herzegovina|Spain": [
+      {
+        "year": 2005,
+        "home": "Spain",
+        "away": "Bosnia and Herzegovina",
+        "hs": 1,
+        "as": 1
+      },
+      {
+        "year": 2008,
+        "home": "Spain",
+        "away": "Bosnia and Herzegovina",
+        "hs": 1,
+        "as": 0
+      },
+      {
+        "year": 2009,
+        "home": "Bosnia and Herzegovina",
+        "away": "Spain",
+        "hs": 2,
+        "as": 5
+      },
+      {
+        "year": 2016,
+        "home": "Bosnia and Herzegovina",
+        "away": "Spain",
+        "hs": 1,
+        "as": 3
+      },
+      {
+        "year": 2018,
+        "home": "Spain",
+        "away": "Bosnia and Herzegovina",
+        "hs": 1,
+        "as": 0
       }
     ],
     "Croatia|Scotland": [
@@ -18614,15 +18614,6 @@
         "as": 0
       }
     ],
-    "Japan|Norway": [
-      {
-        "year": 2002,
-        "home": "Norway",
-        "away": "Japan",
-        "hs": 3,
-        "as": 0
-      }
-    ],
     "Algeria|Belgium": [
       {
         "year": 2002,
@@ -18644,6 +18635,15 @@
         "away": "Algeria",
         "hs": 2,
         "as": 1
+      }
+    ],
+    "Japan|Norway": [
+      {
+        "year": 2002,
+        "home": "Norway",
+        "away": "Japan",
+        "hs": 3,
+        "as": 0
       }
     ],
     "Canada|Switzerland": [
@@ -18696,15 +18696,6 @@
         "as": 1
       }
     ],
-    "South Africa|Turkey": [
-      {
-        "year": 2002,
-        "home": "South Africa",
-        "away": "Turkey",
-        "hs": 2,
-        "as": 0
-      }
-    ],
     "Ecuador|Senegal": [
       {
         "year": 2002,
@@ -18726,6 +18717,15 @@
         "away": "Senegal",
         "hs": 1,
         "as": 2
+      }
+    ],
+    "South Africa|Turkey": [
+      {
+        "year": 2002,
+        "home": "South Africa",
+        "away": "Turkey",
+        "hs": 2,
+        "as": 0
       }
     ],
     "Paraguay|South Africa": [
@@ -21960,21 +21960,21 @@
         "as": 3
       }
     ],
-    "Netherlands|Senegal": [
-      {
-        "year": 2022,
-        "home": "Senegal",
-        "away": "Netherlands",
-        "hs": 0,
-        "as": 2
-      }
-    ],
     "England|Iran": [
       {
         "year": 2022,
         "home": "England",
         "away": "Iran",
         "hs": 6,
+        "as": 2
+      }
+    ],
+    "Netherlands|Senegal": [
+      {
+        "year": 2022,
+        "home": "Senegal",
+        "away": "Netherlands",
+        "hs": 0,
         "as": 2
       }
     ],
@@ -22276,15 +22276,6 @@
         "as": 1
       }
     ],
-    "Jordan|Switzerland": [
-      {
-        "year": 2026,
-        "home": "Switzerland",
-        "away": "Jordan",
-        "hs": 4,
-        "as": 1
-      }
-    ],
     "Senegal|USA": [
       {
         "year": 2026,
@@ -22292,6 +22283,15 @@
         "away": "Senegal",
         "hs": 3,
         "as": 2
+      }
+    ],
+    "Jordan|Switzerland": [
+      {
+        "year": 2026,
+        "home": "Switzerland",
+        "away": "Jordan",
+        "hs": 4,
+        "as": 1
       }
     ],
     "Haiti|New Zealand": [
@@ -22393,6 +22393,15 @@
         "as": 1
       }
     ],
+    "Ghana|Panama": [
+      {
+        "year": 2026,
+        "home": "Ghana",
+        "away": "Panama",
+        "hs": 1,
+        "as": 0
+      }
+    ],
     "DR Congo|Portugal": [
       {
         "year": 2026,
@@ -22409,15 +22418,6 @@
         "away": "Colombia",
         "hs": 1,
         "as": 3
-      }
-    ],
-    "Ghana|Panama": [
-      {
-        "year": 2026,
-        "home": "Ghana",
-        "away": "Panama",
-        "hs": 1,
-        "as": 0
       }
     ],
     "Paraguay|Turkey": [
@@ -22438,15 +22438,6 @@
         "as": 0
       }
     ],
-    "Cape Verde|Uruguay": [
-      {
-        "year": 2026,
-        "home": "Uruguay",
-        "away": "Cape Verde",
-        "hs": 2,
-        "as": 2
-      }
-    ],
     "Belgium|Iran": [
       {
         "year": 2026,
@@ -22454,6 +22445,15 @@
         "away": "Iran",
         "hs": 0,
         "as": 0
+      }
+    ],
+    "Cape Verde|Uruguay": [
+      {
+        "year": 2026,
+        "home": "Uruguay",
+        "away": "Cape Verde",
+        "hs": 2,
+        "as": 2
       }
     ],
     "France|Iraq": [
@@ -22492,15 +22492,6 @@
         "as": 1
       }
     ],
-    "Haiti|Morocco": [
-      {
-        "year": 2026,
-        "home": "Morocco",
-        "away": "Haiti",
-        "hs": 4,
-        "as": 2
-      }
-    ],
     "South Africa|South Korea": [
       {
         "year": 2026,
@@ -22508,6 +22499,15 @@
         "away": "South Korea",
         "hs": 1,
         "as": 0
+      }
+    ],
+    "Haiti|Morocco": [
+      {
+        "year": 2026,
+        "home": "Morocco",
+        "away": "Haiti",
+        "hs": 4,
+        "as": 2
       }
     ],
     "Curacao|Ivory Coast": [
@@ -22519,13 +22519,13 @@
         "as": 2
       }
     ],
-    "Iraq|Senegal": [
+    "Belgium|New Zealand": [
       {
         "year": 2026,
-        "home": "Senegal",
-        "away": "Iraq",
-        "hs": 5,
-        "as": 0
+        "home": "New Zealand",
+        "away": "Belgium",
+        "hs": 1,
+        "as": 5
       }
     ],
     "Cape Verde|Saudi Arabia": [
@@ -22537,13 +22537,31 @@
         "as": 0
       }
     ],
-    "Belgium|New Zealand": [
+    "Iraq|Senegal": [
       {
         "year": 2026,
-        "home": "New Zealand",
-        "away": "Belgium",
-        "hs": 1,
-        "as": 5
+        "home": "Senegal",
+        "away": "Iraq",
+        "hs": 5,
+        "as": 0
+      }
+    ],
+    "Croatia|Ghana": [
+      {
+        "year": 2026,
+        "home": "Croatia",
+        "away": "Ghana",
+        "hs": 2,
+        "as": 1
+      }
+    ],
+    "DR Congo|Uzbekistan": [
+      {
+        "year": 2026,
+        "home": "DR Congo",
+        "away": "Uzbekistan",
+        "hs": 3,
+        "as": 1
       }
     ],
     "Argentina|Jordan": [
@@ -22562,24 +22580,6 @@
         "away": "Portugal",
         "hs": 0,
         "as": 0
-      }
-    ],
-    "DR Congo|Uzbekistan": [
-      {
-        "year": 2026,
-        "home": "DR Congo",
-        "away": "Uzbekistan",
-        "hs": 3,
-        "as": 1
-      }
-    ],
-    "Croatia|Ghana": [
-      {
-        "year": 2026,
-        "home": "Croatia",
-        "away": "Ghana",
-        "hs": 2,
-        "as": 1
       }
     ],
     "Ivory Coast|Norway": [
@@ -22609,15 +22609,6 @@
         "as": 2
       }
     ],
-    "Colombia|Ghana": [
-      {
-        "year": 2026,
-        "home": "Colombia",
-        "away": "Ghana",
-        "hs": 1,
-        "as": 0
-      }
-    ],
     "Argentina|Cape Verde": [
       {
         "year": 2026,
@@ -22625,6 +22616,15 @@
         "away": "Cape Verde",
         "hs": 3,
         "as": 2
+      }
+    ],
+    "Colombia|Ghana": [
+      {
+        "year": 2026,
+        "home": "Colombia",
+        "away": "Ghana",
+        "hs": 1,
+        "as": 0
       }
     ]
   }
